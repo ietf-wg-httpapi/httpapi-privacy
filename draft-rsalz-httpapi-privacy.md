@@ -9,15 +9,15 @@ number:
 date:
 consensus: true
 v: 3
-area: WIT
-workgroup: HTTPAPI Working Group
+area: "Web and Internet Transport"
+workgroup: "Building Blocks for HTTP APIs"
 venue:
-  group: HTTPAPI
-  type: Working Group
-  mail: httpapi@ietf.org
-  arch: https://example.com/WG
-  github: richsalz/draft-rsalz-httpapi-privacy
-  latest: 
+  group: "Building Blocks for HTTP APIs"
+  type: "Working Group"
+  mail: "httpapi@ietf.org"
+  arch: "https://mailarchive.ietf.org/arch/browse/httpapi/"
+  github: "richsalz/draft-rsalz-httpapi-privacy"
+  latest: "https://richsalz.github.io/draft-rsalz-httpapi-privacy/draft-rsalz-httpapi-privacy.html"
 
 author:
  -
