@@ -1,0 +1,3 @@
+# Automatically generated CODEOWNERS
+# Regenerate with `make update-codeowners`
+draft-rsalz-httpapi-privacy.md rsalz@akamai.com mbishop@akamai.com marius@transloadit.com
