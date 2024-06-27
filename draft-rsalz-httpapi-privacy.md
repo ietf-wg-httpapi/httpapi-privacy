@@ -24,11 +24,11 @@ author:
     fullname: Rich Salz
     organization: Akamai Technologies
     email: rsalz@akamai.com
--
+ -
     fullname: Mike Bishop
     organization: Akamai Technologies
     email: mbishop@akamai.com
--
+ -
     fullname: Marius Kleidl
     organization: TODO
     email: marius@transloadit.com
