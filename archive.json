@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-06-30T01:00:40.619979+00:00",
+  "timestamp": "2024-07-02T00:56:17.895766+00:00",
   "repo": "richsalz/draft-rsalz-httpapi-privacy",
   "labels": [
     {
@@ -49,6 +49,23 @@
       "color": "ffffff"
     }
   ],
-  "issues": [],
+  "issues": [
+    {
+      "number": 1,
+      "id": "I_kwDOMPAWUs6OJd0Y",
+      "title": "Comments",
+      "url": "https://github.com/richsalz/draft-rsalz-httpapi-privacy/issues/1",
+      "state": "OPEN",
+      "author": "Acconut",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Thank you for setting up this draft, Rich! I will leave a few comments here, let me know if you prefer to discuss them somewhere else.\r\n\r\nIn [their blog post](https://jviide.iki.fi/http-redirects), @jviide suggested to disable the port 80 for HTTP entirely for API usage. While this might work in some scenarios, it would not work for setups where for example a load balancer is shared between an API and website. HTTP-to-HTTPS redirects are still desired for the website and the hostname is not known before a connection is already established. Therefore, I would be hesitant to include closing the port as a recommendation here.\r\n\r\nRejecting unencrypted but authenticated requests and revoking the credentials is a good approach. But it also gives everybody, who has access to the credentials, the ability to revoke them by issuing an unencrypted requested, which might disrupt the service. While a service disruption is still preferable to the leakage of credentials, it might still be worth including as a caveat to make service operators aware. \r\n\r\nI am also wondering how the client-side can protect themselves. A client cannot expect that every service rejects unencrypted requests and even revokes the credentials. Mistakes happen and one might want to prevent them. Proactive measures to avoid unencrypted requests include:\r\n- Blocking outgoing traffic to TCP port 80 (if the client also controls the firewall)\r\n- Configuring the HTTP client to only allow HTTPS connections\r\n\r\nBrowsers also have a [HTTP Strict Transport Security (HSTS) preload list](https://hstspreload.org/). If a website is on this list, browsers will only connect to it via HTTPS and not even attempt a first try using HTTP. Would a similar initiative for API clients make sense? As an API operator I could add my domain to this list and the HTTP client would immediately raise a meaningful error if my user tries to access my API using plain HTTP.",
+      "createdAt": "2024-07-01T22:35:47Z",
+      "updatedAt": "2024-07-01T22:36:56Z",
+      "closedAt": null,
+      "comments": []
+    }
+  ],
   "pulls": []
 }
