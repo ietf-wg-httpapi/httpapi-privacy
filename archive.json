@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-07-18T00:56:39.656866+00:00",
+  "timestamp": "2024-07-21T01:01:42.586975+00:00",
   "repo": "richsalz/draft-rsalz-httpapi-privacy",
   "labels": [
     {
@@ -62,7 +62,7 @@
       "labels": [],
       "body": "Thank you for setting up this draft, Rich! I will leave a few comments here, let me know if you prefer to discuss them somewhere else.\r\n\r\nIn [their blog post](https://jviide.iki.fi/http-redirects), @jviide suggested to disable the port 80 for HTTP entirely for API usage. While this might work in some scenarios, it would not work for setups where for example a load balancer is shared between an API and website. HTTP-to-HTTPS redirects are still desired for the website and the hostname is not known before a connection is already established. Therefore, I would be hesitant to include closing the port as a recommendation here.\r\n\r\nRejecting unencrypted but authenticated requests and revoking the credentials is a good approach. But it also gives everybody, who has access to the credentials, the ability to revoke them by issuing an unencrypted requested, which might disrupt the service. While a service disruption is still preferable to the leakage of credentials, it might still be worth including as a caveat to make service operators aware. \r\n\r\nI am also wondering how the client-side can protect themselves. A client cannot expect that every service rejects unencrypted requests and even revokes the credentials. Mistakes happen and one might want to prevent them. Proactive measures to avoid unencrypted requests include:\r\n- Blocking outgoing traffic to TCP port 80 (if the client also controls the firewall)\r\n- Configuring the HTTP client to only allow HTTPS connections\r\n\r\nBrowsers also have a [HTTP Strict Transport Security (HSTS) preload list](https://hstspreload.org/). If a website is on this list, browsers will only connect to it via HTTPS and not even attempt a first try using HTTP. Would a similar initiative for API clients make sense? As an API operator I could add my domain to this list and the HTTP client would immediately raise a meaningful error if my user tries to access my API using plain HTTP.",
       "createdAt": "2024-07-01T22:35:47Z",
-      "updatedAt": "2024-07-16T19:54:17Z",
+      "updatedAt": "2024-07-18T10:32:05Z",
       "closedAt": null,
       "comments": [
         {
@@ -71,6 +71,13 @@
           "body": "The HSTS preload is an interesting comparison, but I suspect it ultimately fails because so many API accesses will be using bespoke clients. Certainly shipping something like this in `curl` or Python `requests` would make it harder to accidentally hit a plaintext API, but I'm dubious we'd get every HTTP client API to respect it or keep the list updated.\r\n\r\nFurther, I think the HSTS preload list is now semi-obsolete. The reason for having a preload list is to get the signal to the client before the client can make a plaintext HTTP request. There is now a more real-time method for doing that: `HTTPS` records, among other things, tell the client about [HSTS-like requirements](https://www.rfc-editor.org/rfc/rfc9460.html#name-http-strict-transport-secur) during the DNS query stage, before any credentials are exposed.\r\n\r\nI think one of our recommended mitigations should be that API endpoints publish `HTTPS` records in the DNS, and that HTTP client libraries respect them, automatically switching to HTTPS endpoints unless explicitly instructed not to.",
           "createdAt": "2024-07-16T19:54:16Z",
           "updatedAt": "2024-07-16T19:54:16Z"
+        },
+        {
+          "author": "Acconut",
+          "authorAssociation": "COLLABORATOR",
+          "body": "The HTTPS record is a useful tool, I agree. Thanks for sharing! All in all, there are a few recommendations we can make for the involved parties:\r\n\r\n- for API consumers:\r\n  - configure client library to disable HTTP altogether or at least respect HTTPS record\r\n  - configure firewall to disallow outgoing traffic on default HTTP port\r\n- for client libraries\r\n  - provide option to disable insecure HTTP requests\r\n  - respect HTTPS record (either by default or via option)\r\n- for service providers\r\n  - reject insecure authenticated requests and invalidate involved credentials\r\n\r\nI wonder if it's also helpful to recommend intermediaries to forward insecure authenticated requests (instead of rejecting them early on), so that the target server can then properly invalidate the corresponding credentials.",
+          "createdAt": "2024-07-18T10:32:04Z",
+          "updatedAt": "2024-07-18T10:32:04Z"
         }
       ]
     }
