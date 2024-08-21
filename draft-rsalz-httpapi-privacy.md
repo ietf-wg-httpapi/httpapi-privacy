@@ -199,7 +199,6 @@ This document has no IANA actions.
 --- back
 
 # Acknowledgments
-{:numbered="false"}
 
 We are grateful to Joachim Viide for his {{BLOG}} blog posting that brought up the issue.
 
