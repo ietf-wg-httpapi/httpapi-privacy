@@ -5,9 +5,9 @@
 Building Blocks for HTTP APIs                                    R. Salz
 Internet-Draft                                                 M. Bishop
 Intended status: Informational                       Akamai Technologies
-Expires: 22 February 2025                                      M. Kleidl
+Expires: 23 February 2025                                      M. Kleidl
                                                                     TODO
-                                                          21 August 2024
+                                                          22 August 2024
 
 
                           API Keys and Privacy
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 22 February 2025.
+   This Internet-Draft will expire on 23 February 2025.
 
 Copyright Notice
 
@@ -169,9 +169,9 @@ Table of Contents
    and corrected.
 
    Servers MAY induce such an early failure by not accepting unencrypted
-   connections, e.g. on port 80.  This makes it impossible a client to
-   send a credential over an insecure channel to the authentic server,
-   as no such channel can be opened.
+   connections, e.g. on port 80.  This makes it impossible for a client
+   to send a credential over an insecure channel to the authentic
+   server, as no such channel can be opened.
 
    However, this mitigation is limited against active network attackers,
    who can impersonate the server and accept the client's insecure
