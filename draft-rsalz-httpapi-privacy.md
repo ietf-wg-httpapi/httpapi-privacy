@@ -1,7 +1,7 @@
 ---
 title: "API Keys and Privacy"
 abbrev: "privacy"
-category: info
+category: bcp
 
 docname: draft-rsalz-httpapi-privacy-latest
 submissiontype: IETF
@@ -88,7 +88,7 @@ no authentication is used.
 
 ## Conventions and Definitions
 
-{::boilerplate bcp14-tagged}
+{::boilerplate bcp14info}
 
 
 # Server Recommendations
