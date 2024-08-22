@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-20T00:58:19.390764+00:00",
+  "timestamp": "2024-08-22T00:59:47.441577+00:00",
   "repo": "richsalz/draft-rsalz-httpapi-privacy",
   "labels": [
     {
@@ -82,5 +82,32 @@
       ]
     }
   ],
-  "pulls": []
+  "pulls": [
+    {
+      "number": 2,
+      "id": "PR_kwDOMPAWUs55CROL",
+      "title": "First draft",
+      "url": "https://github.com/richsalz/draft-rsalz-httpapi-privacy/pull/2",
+      "state": "OPEN",
+      "author": "MikeBishop",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Made a first pass at some text. Thoughts?",
+      "createdAt": "2024-08-21T20:11:04Z",
+      "updatedAt": "2024-08-21T22:03:43Z",
+      "baseRepository": "richsalz/draft-rsalz-httpapi-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "d171c949ac234ce4b7f8b5d211e2883ca29192a4",
+      "headRepository": "richsalz/draft-rsalz-httpapi-privacy",
+      "headRefName": "mbishop/text",
+      "headRefOid": "fcad6fe60cb86cefd473a249cb042f06107b668d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": []
+    }
+  ]
 }
