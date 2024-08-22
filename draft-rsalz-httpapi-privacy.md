@@ -121,7 +121,7 @@ possible, it is advantageous for such a misconfiguration to fail immediately so
 that the error can be noticed and corrected.
 
 Servers MAY induce such an early failure by not accepting unencrypted
-connections, e.g. on port 80. This makes it impossible a client to send a
+connections, e.g. on port 80. This makes it impossible for a client to send a
 credential over an insecure channel to the authentic server, as no such channel
 can be opened.
 
