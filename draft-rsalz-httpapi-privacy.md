@@ -30,7 +30,7 @@ author:
     email: mbishop@akamai.com
  -
     fullname: Marius Kleidl
-    organization: TODO
+    organization: Transloadit
     email: marius@transloadit.com
 
 normative:
