@@ -5,9 +5,9 @@
 Building Blocks for HTTP APIs                                    R. Salz
 Internet-Draft                                                 M. Bishop
 Intended status: Best Current Practice               Akamai Technologies
-Expires: 23 February 2025                                      M. Kleidl
-                                                                    TODO
-                                                          22 August 2024
+Expires: 25 February 2025                                      M. Kleidl
+                                                             Transloadit
+                                                          24 August 2024
 
 
                           API Keys and Privacy
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 February 2025.
+   This Internet-Draft will expire on 25 February 2025.
 
 Copyright Notice
 
@@ -361,5 +361,5 @@ Authors' Addresses
 
 
    Marius Kleidl
-   TODO
+   Transloadit
    Email: marius@transloadit.com
