@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-22T00:59:47.441577+00:00",
+  "timestamp": "2024-08-25T01:03:41.317476+00:00",
   "repo": "richsalz/draft-rsalz-httpapi-privacy",
   "labels": [
     {
@@ -55,15 +55,15 @@
       "id": "I_kwDOMPAWUs6OJd0Y",
       "title": "Comments",
       "url": "https://github.com/richsalz/draft-rsalz-httpapi-privacy/issues/1",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Acconut",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Thank you for setting up this draft, Rich! I will leave a few comments here, let me know if you prefer to discuss them somewhere else.\r\n\r\nIn [their blog post](https://jviide.iki.fi/http-redirects), @jviide suggested to disable the port 80 for HTTP entirely for API usage. While this might work in some scenarios, it would not work for setups where for example a load balancer is shared between an API and website. HTTP-to-HTTPS redirects are still desired for the website and the hostname is not known before a connection is already established. Therefore, I would be hesitant to include closing the port as a recommendation here.\r\n\r\nRejecting unencrypted but authenticated requests and revoking the credentials is a good approach. But it also gives everybody, who has access to the credentials, the ability to revoke them by issuing an unencrypted requested, which might disrupt the service. While a service disruption is still preferable to the leakage of credentials, it might still be worth including as a caveat to make service operators aware. \r\n\r\nI am also wondering how the client-side can protect themselves. A client cannot expect that every service rejects unencrypted requests and even revokes the credentials. Mistakes happen and one might want to prevent them. Proactive measures to avoid unencrypted requests include:\r\n- Blocking outgoing traffic to TCP port 80 (if the client also controls the firewall)\r\n- Configuring the HTTP client to only allow HTTPS connections\r\n\r\nBrowsers also have a [HTTP Strict Transport Security (HSTS) preload list](https://hstspreload.org/). If a website is on this list, browsers will only connect to it via HTTPS and not even attempt a first try using HTTP. Would a similar initiative for API clients make sense? As an API operator I could add my domain to this list and the HTTP client would immediately raise a meaningful error if my user tries to access my API using plain HTTP.",
       "createdAt": "2024-07-01T22:35:47Z",
-      "updatedAt": "2024-07-18T10:32:05Z",
-      "closedAt": null,
+      "updatedAt": "2024-08-22T19:42:46Z",
+      "closedAt": "2024-08-22T19:42:45Z",
       "comments": [
         {
           "author": "MikeBishop",
@@ -78,6 +78,86 @@
           "body": "The HTTPS record is a useful tool, I agree. Thanks for sharing! All in all, there are a few recommendations we can make for the involved parties:\r\n\r\n- for API consumers:\r\n  - configure client library to disable HTTP altogether or at least respect HTTPS record\r\n  - configure firewall to disallow outgoing traffic on default HTTP port\r\n- for client libraries\r\n  - provide option to disable insecure HTTP requests\r\n  - respect HTTPS record (either by default or via option)\r\n- for service providers\r\n  - reject insecure authenticated requests and invalidate involved credentials\r\n\r\nI wonder if it's also helpful to recommend intermediaries to forward insecure authenticated requests (instead of rejecting them early on), so that the target server can then properly invalidate the corresponding credentials.",
           "createdAt": "2024-07-18T10:32:04Z",
           "updatedAt": "2024-07-18T10:32:04Z"
+        },
+        {
+          "author": "MikeBishop",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I believe that #2 addresses the suggestions discussed here.",
+          "createdAt": "2024-08-22T19:42:45Z",
+          "updatedAt": "2024-08-22T19:42:45Z"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "id": "I_kwDOMPAWUs6T6ihQ",
+      "title": "HTTP Status Code",
+      "url": "https://github.com/richsalz/draft-rsalz-httpapi-privacy/issues/3",
+      "state": "OPEN",
+      "author": "MikeBishop",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Discussion in Notes indicates that 403, while unintuitive, appears to be the closest HTTP status code for \"I won't serve this over an unencrypted channel.\"  For reference:\r\n\r\n- 403 (Forbidden): \"the server understood the request but refuses to fulfill it\"\r\n  - \"server considers [the credentials] insufficient to grant access.\"\r\n  - \"However, a request might be forbidden for reasons unrelated to the credentials.\"\r\n- 421 (Misdirected Request): \"the request was directed at a server that is unable or unwilling to produce an authoritative response for the target URI\"\r\n  - \"a target URI that does not match an origin for which the server has been configured or does not match the connection context over which the request was received.\"\r\n  - More appropriate for receiving an \"https://\" URI over a non-TLS connection\r\n- 426 (Upgrade Required): \"server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol.\"\r\n  - However, \"server MUST send an [Upgrade](https://httpwg.org/specs/rfc9110.html#field.upgrade) header field in a 426 response to indicate the required protocol(s)\" is probably a non-starter unless the server implements RFC2817, which is fairly niche\r\n\r\nShould we recommend one of these, mint a new status code, or stay silent on the topic?",
+      "createdAt": "2024-08-22T19:52:20Z",
+      "updatedAt": "2024-08-23T22:40:05Z",
+      "closedAt": null,
+      "comments": [
+        {
+          "author": "MikeBishop",
+          "authorAssociation": "COLLABORATOR",
+          "body": "(Note that a new status code would probably not be informational, and might belong in a separate draft.)",
+          "createdAt": "2024-08-22T19:56:48Z",
+          "updatedAt": "2024-08-22T19:56:48Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "I think we should use 403 and not define a new status code.  One reason is we want this to be adopted quickly.",
+          "createdAt": "2024-08-22T22:47:23Z",
+          "updatedAt": "2024-08-22T22:47:23Z"
+        },
+        {
+          "author": "jviide",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think 403 is a good option. Its defined semantics _can_ be understood to include the \"I won't serve HTTP\" scenario. 426 would have been my favorite if not for [RFC 9110](https://httpwg.org/specs/rfc9110.html) stating:\r\n\r\n> the server MUST send an Upgrade header field\r\n\r\nand \r\n\r\n> The Upgrade header field only applies to switching protocols on top of the existing connection; it cannot be used to switch the underlying connection (transport) protocol, nor to switch the existing communication to a different connection.",
+          "createdAt": "2024-08-23T16:17:05Z",
+          "updatedAt": "2024-08-23T16:17:05Z"
+        },
+        {
+          "author": "jviide",
+          "authorAssociation": "COLLABORATOR",
+          "body": "A side note: I don't know if this is an appropriate for this specific document, but how about to explicitly recommending attaching an informational error message along with the 403/426/421/... error? Pre-existing status codes may to have multiple meanings, so a developer accidentally using HTTP instead of HTTPS might confuse the response to mean that the credentials are wrong. As an example, Stripe returns status code 403 with the following response payload that nudges the developer towards a correct solution:\r\n\r\n```\r\n{\r\n  \"error\": {\r\n    \"message\" : \"The Stripe API is only accessible over HTTPS.  Please see <https://stripe.com/docs> for more information.\",\r\n    \"type\": \"invalid_request_error\"\r\n  }\r\n}\r\n```\r\n\r\nAnthropic also recommends revoking the API key manually (with status 400), which is one approach for cases where auto-revocation is not a viable option:\r\n\r\n```\r\n{\r\n  \"error\": {\r\n    \"type\": \"invalid_request_error\",\r\n    \"message\": \"This request was sent over HTTP. Only HTTPS is supported for API use. Consider revoking your API key, as it was sent in plaintext over the internet with this request.\"\r\n  }\r\n}\r\n```\r\n\r\nOf course different services format their errors differently, so it might be hard to suggest something overly specific.",
+          "createdAt": "2024-08-23T16:33:06Z",
+          "updatedAt": "2024-08-23T16:33:06Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "I think having a SHOULD about detailed error response, and a sample or two is a great idea!",
+          "createdAt": "2024-08-23T16:36:51Z",
+          "updatedAt": "2024-08-23T16:36:51Z"
+        },
+        {
+          "author": "MikeBishop",
+          "authorAssociation": "COLLABORATOR",
+          "body": "So long as the 400 please-revoke path gets sent regardless of the credential.  Otherwise, that offers an explicit unencrypted signal that a valid credential was used. I'd prefer to keep the current advice that the response should not vary based on whether the credential used was valid or not.",
+          "createdAt": "2024-08-23T20:30:44Z",
+          "updatedAt": "2024-08-23T20:30:44Z"
+        },
+        {
+          "author": "jviide",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree. The same message should be sent whether the credentials are valid or not.\r\n\r\nMaybe there could be an explicit recommendation to _not_ check credential validity at all on the plaintext HTTP side of the API. That could also help avoid timing differences in addition to accidental message differences and such between valid and non-valid credentials.",
+          "createdAt": "2024-08-23T20:48:46Z",
+          "updatedAt": "2024-08-23T20:48:46Z"
+        },
+        {
+          "author": "Acconut",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I agree with the points that were already brought up. 403 is a good choice, unless there is a use for a generic client/intermediary to detect such error responses. But I don't think there is a need for this.\r\n\r\nThe response should include a descriptive message in the body, but the server must not validate or further inspect the provided credentials.",
+          "createdAt": "2024-08-23T22:40:04Z",
+          "updatedAt": "2024-08-23T22:40:04Z"
         }
       ]
     }
@@ -88,26 +168,168 @@
       "id": "PR_kwDOMPAWUs55CROL",
       "title": "First draft",
       "url": "https://github.com/richsalz/draft-rsalz-httpapi-privacy/pull/2",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "MikeBishop",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Made a first pass at some text. Thoughts?",
       "createdAt": "2024-08-21T20:11:04Z",
-      "updatedAt": "2024-08-21T22:03:43Z",
+      "updatedAt": "2024-08-23T23:27:07Z",
       "baseRepository": "richsalz/draft-rsalz-httpapi-privacy",
       "baseRefName": "main",
       "baseRefOid": "d171c949ac234ce4b7f8b5d211e2883ca29192a4",
       "headRepository": "richsalz/draft-rsalz-httpapi-privacy",
       "headRefName": "mbishop/text",
-      "headRefOid": "fcad6fe60cb86cefd473a249cb042f06107b668d",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "e285535dd9dbab4989c80c17cebccf3a199078d1",
+      "closedAt": "2024-08-22T19:41:14Z",
+      "mergedAt": "2024-08-22T19:41:14Z",
+      "mergedBy": "MikeBishop",
+      "mergeCommit": {
+        "oid": "8ded15d83cbffe874e9dbbe02e3d3777b042d4a8"
+      },
+      "comments": [
+        {
+          "author": "MikeBishop",
+          "authorAssociation": "COLLABORATOR",
+          "body": "What don't you like about the Security Considerations?",
+          "createdAt": "2024-08-22T19:09:29Z",
+          "updatedAt": "2024-08-22T19:09:29Z"
+        },
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "> What don't you like about the Security Considerations?\r\n\r\nNothing, my mind is going and I missed the \"# Security Considerations\" title I guess.  All good.  Merge it and/or wait for others to comment",
+          "createdAt": "2024-08-22T19:12:28Z",
+          "updatedAt": "2024-08-22T19:12:28Z"
+        },
+        {
+          "author": "Acconut",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Thank you very much for writing this, Mike! The draft looks great and includes all points we have discussed so far. For me, this seems ready to be brought to the WG.",
+          "createdAt": "2024-08-23T23:27:06Z",
+          "updatedAt": "2024-08-23T23:27:06Z"
+        }
+      ],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMPAWUs6Gbnqo",
+          "commit": {
+            "abbreviatedOid": "fcad6fe"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "should put back the securty considerations section.\r\n\r\nwow, really nice job.",
+          "createdAt": "2024-08-22T18:37:26Z",
+          "updatedAt": "2024-08-22T18:37:26Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMPAWUs6GcB0D",
+          "commit": {
+            "abbreviatedOid": "fcad6fe"
+          },
+          "author": "MikeBishop",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2024-08-22T19:36:27Z",
+          "updatedAt": "2024-08-22T19:36:28Z",
+          "comments": [
+            {
+              "originalPosition": 90,
+              "body": "```suggestion\r\nconnections, e.g. on port 80. This makes it impossible for a client to send a\r\n```",
+              "createdAt": "2024-08-22T19:36:27Z",
+              "updatedAt": "2024-08-22T19:36:28Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "id": "PR_kwDOMPAWUs55LD1l",
+      "title": "Move to BCP; tweak boilerplate",
+      "url": "https://github.com/richsalz/draft-rsalz-httpapi-privacy/pull/4",
+      "state": "MERGED",
+      "author": "richsalz",
+      "authorAssociation": "OWNER",
+      "assignees": [],
+      "labels": [],
+      "body": "I think this should be BCP",
+      "createdAt": "2024-08-22T20:43:49Z",
+      "updatedAt": "2024-08-22T20:52:05Z",
+      "baseRepository": "richsalz/draft-rsalz-httpapi-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "8ded15d83cbffe874e9dbbe02e3d3777b042d4a8",
+      "headRepository": "richsalz/draft-rsalz-httpapi-privacy",
+      "headRefName": "its-a-girl",
+      "headRefOid": "63fadba6a4cd9db4a8e54a991b3c67c272ad218f",
+      "closedAt": "2024-08-22T20:52:02Z",
+      "mergedAt": "2024-08-22T20:52:02Z",
+      "mergedBy": "richsalz",
+      "mergeCommit": {
+        "oid": "81beabbff63a58263d63c8ab83409c8546140afb"
+      },
       "comments": [],
-      "reviews": []
+      "reviews": [
+        {
+          "id": "PRR_kwDOMPAWUs6Gchlq",
+          "commit": {
+            "abbreviatedOid": "63fadba"
+          },
+          "author": "MikeBishop",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-22T20:46:54Z",
+          "updatedAt": "2024-08-22T20:46:54Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "id": "PR_kwDOMPAWUs55S2xJ",
+      "title": "Update affiliation",
+      "url": "https://github.com/richsalz/draft-rsalz-httpapi-privacy/pull/5",
+      "state": "MERGED",
+      "author": "Acconut",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2024-08-23T23:29:10Z",
+      "updatedAt": "2024-08-24T01:10:59Z",
+      "baseRepository": "richsalz/draft-rsalz-httpapi-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "81beabbff63a58263d63c8ab83409c8546140afb",
+      "headRepository": "richsalz/draft-rsalz-httpapi-privacy",
+      "headRefName": "Acconut-patch-1",
+      "headRefOid": "0fe276680a57da25296c5a5148d57b69e5228d84",
+      "closedAt": "2024-08-24T01:10:59Z",
+      "mergedAt": "2024-08-24T01:10:59Z",
+      "mergedBy": "richsalz",
+      "mergeCommit": {
+        "oid": "038212f1451f7e7c940ea688ea6f1614cae1cda8"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMPAWUs6GmpdN",
+          "commit": {
+            "abbreviatedOid": "0fe2766"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2024-08-24T01:10:50Z",
+          "updatedAt": "2024-08-24T01:10:50Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
