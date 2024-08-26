@@ -1032,7 +1032,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salz, et al.</td>
-<td class="center">Expires 25 February 2025</td>
+<td class="center">Expires 27 February 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1045,12 +1045,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-rsalz-httpapi-privacy-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-08-24" class="published">24 August 2024</time>
+<time datetime="2024-08-26" class="published">26 August 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-02-25">25 February 2025</time></dd>
+<dd class="expires"><time datetime="2025-02-27">27 February 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1111,7 +1111,7 @@ HTTP APIs. It does not specify a protocol.<a href="#section-abstract-1" class="p
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 25 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1197,18 +1197,10 @@ HTTP APIs. It does not specify a protocol.<a href="#section-abstract-1" class="p
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-notes" class="internal xref">Notes</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-from-some-email" class="internal xref">From some email</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1461,63 +1453,13 @@ rate-limiting the establishment of insecure connections.<a href="#section-4-2" c
 <div id="acknowledgments">
 <section id="appendix-A">
       <h2 id="name-acknowledgments">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">We are grateful to Joachim Viide for his <span>[<a href="#BLOG" class="cite xref">BLOG</a>]</span> blog posting that brought up the issue.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="notes">
-<section id="appendix-B">
-      <h2 id="name-notes">
-<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-notes" class="section-name selfRef">Notes</a>
-      </h2>
-<p id="appendix-B-1">I don't disagree with the thrust of the article, but I take a different
-message from it. It's not that the redirect is bad; the redirect is beside
-the point.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">An unencrypted authenticated request should, in general, not succeed. It
-should at a minimum fail and ideally revoke the just-disclosed credentials.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
-<p id="appendix-B-3">The redirect is bad in this case because the subsequent request succeeded.
-Returning a 200 over HTTP would be just as bad.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
-<p id="appendix-B-4">Browsers warn if you enter a password field on a form that sends to http.
-Api clients don't, and many API's have an API key in the link or as a header field.<a href="#appendix-B-4" class="pilcrow">¶</a></p>
-<div id="from-some-email">
-<section id="appendix-B.1">
-        <h3 id="name-from-some-email">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-from-some-email" class="section-name selfRef">From some email</a>
-        </h3>
-<p id="appendix-B.1-1">I chose to explicitly address redirects in particular, as they seem to be the
-status quo that most APIs implement, probably due to redirects being the
-standard operating procedure" in webdev lore. Redirects are also often the
-simplest option due to server software like Caddy supporting them out of the
-box.<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-2">Ben Bucksch had good points. Failing unencrypted requests (or connection
-attempts) is a relatively low hanging fruit for improving the aforementioned
-status quo. Then at least accidental plain HTTP use can be noticed easily and
-fixed early, reducing the window of opportunity for attacks. API providers
-can also implement failures first and then move on to the more complex topic
-of token auto-revocation. Anthropic chose an interesting approach: their API
-now returns an error that also suggests rotating the API keys manually. I
-think its a good quick improvement, informing the API consumer of a
-recommended path forward.<a href="#appendix-B.1-2" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-3">As for using the HTTP status code 426, I almost implemented that for our API
-when I noticed that NPM uses it. However,
-https://httpwg.org/specs/rfc9110.html#status.426 states:<a href="#appendix-B.1-3" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-4">"the server MUST send an Upgrade header field"<a href="#appendix-B.1-4" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-5">Later in section 7.8 (https://httpwg.org/specs/rfc9110.html#rfc.section.7.8):<a href="#appendix-B.1-5" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-6">The Upgrade header field only applies to switching protocols on top of the
-  existing connection; it cannot be used to switch the underlying connection
-  (transport) protocol, nor to switch the existing communication to a
-  different connection.<a href="#appendix-B.1-6" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-7">As the switch from HTTP to HTTPS would require a new connection, I felt that
-it was not a perfect match. Thats why I ended up emulating Stripe with status
-code 403, which "indicates that the server understood the request but refuses
-to fulfill it." A bit more open-ended, but not a perfect match either.<a href="#appendix-B.1-7" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
 <div id="authors-addresses">
-<section id="appendix-C">
+<section id="appendix-B">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
