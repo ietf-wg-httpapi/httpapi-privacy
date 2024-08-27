@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-08-25T01:03:41.317476+00:00",
+  "timestamp": "2024-08-27T00:59:59.144619+00:00",
   "repo": "richsalz/draft-rsalz-httpapi-privacy",
   "labels": [
     {
@@ -327,6 +327,48 @@
           "body": "",
           "createdAt": "2024-08-24T01:10:50Z",
           "updatedAt": "2024-08-24T01:10:50Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "id": "PR_kwDOMPAWUs55dBIa",
+      "title": "Trim appendices before publishing",
+      "url": "https://github.com/richsalz/draft-rsalz-httpapi-privacy/pull/6",
+      "state": "MERGED",
+      "author": "MikeBishop",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Remove Notes appendix, return Acks to unnumbered. I think the notes are accounted for in the text now?",
+      "createdAt": "2024-08-26T15:13:27Z",
+      "updatedAt": "2024-08-26T15:38:02Z",
+      "baseRepository": "richsalz/draft-rsalz-httpapi-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "038212f1451f7e7c940ea688ea6f1614cae1cda8",
+      "headRepository": "richsalz/draft-rsalz-httpapi-privacy",
+      "headRefName": "no_notes",
+      "headRefOid": "0e27c58418a3b921e3162d758b3bc29fc4060c82",
+      "closedAt": "2024-08-26T15:38:02Z",
+      "mergedAt": "2024-08-26T15:38:02Z",
+      "mergedBy": "MikeBishop",
+      "mergeCommit": {
+        "oid": "431659f1fc8c863d64f09a3662318d963d67130a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMPAWUs6Gw-Fn",
+          "commit": {
+            "abbreviatedOid": "0e27c58"
+          },
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "state": "APPROVED",
+          "body": "agreed.  post the draft and we'll ask Darrel to handle adoption.\r\n",
+          "createdAt": "2024-08-26T15:30:24Z",
+          "updatedAt": "2024-08-26T15:30:24Z",
           "comments": []
         }
       ]
