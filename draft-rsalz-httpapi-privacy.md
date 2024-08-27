@@ -27,7 +27,7 @@ author:
  -
     fullname: Mike Bishop
     organization: Akamai Technologies
-    email: mbishop@akamai.com
+    email: mbishop@evequefou.be
  -
     fullname: Marius Kleidl
     organization: Transloadit
