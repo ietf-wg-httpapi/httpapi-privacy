@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-09-03T01:00:41.968942+00:00",
+  "timestamp": "2024-09-05T01:01:27.370283+00:00",
   "repo": "richsalz/draft-rsalz-httpapi-privacy",
   "labels": [
     {
@@ -160,6 +160,22 @@
           "updatedAt": "2024-08-23T22:40:04Z"
         }
       ]
+    },
+    {
+      "number": 7,
+      "id": "I_kwDOMPAWUs6VZj27",
+      "title": "SHOULD shmood",
+      "url": "https://github.com/richsalz/draft-rsalz-httpapi-privacy/issues/7",
+      "state": "OPEN",
+      "author": "martinthomson",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> Clients SHOULD support and query for HTTPS records [[RFC9460](https://www.ietf.org/archive/id/draft-rsalz-httpapi-privacy-00.html#RFC9460)] when establishing a connection and SHOULD respect HSTS headers [[RFC6797](https://www.ietf.org/archive/id/draft-rsalz-httpapi-privacy-00.html#RFC6797)] received from a server.\r\n\r\nThere's a bunch more that follows with SHOULD statements...\r\n\r\nHere's an idea:\r\n\r\n> Clients of HTTP APIs MUST implement and use HTTPS exclusively. This makes any upgrade mechanism unnecessary.\r\n>\r\n> Clients SHOULD support and query for HTTPS records [[RFC9460](https://www.ietf.org/archive/id/draft-rsalz-httpapi-privacy-00.html#RFC9460)] when establishing a connection. This gives servers an opportunity to provide more complete information about capabilities, some of which are security-relevant.\r\n\r\nThis avoids the whole HSTS thing and all the business about Secure cookies.  I get why unsecured HTTP might be in use on the Web (well, not entirely), but APIs that manage secrets have no business doing that.\r\n\r\nIt's 2024.",
+      "createdAt": "2024-09-05T00:03:23Z",
+      "updatedAt": "2024-09-05T00:03:23Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
