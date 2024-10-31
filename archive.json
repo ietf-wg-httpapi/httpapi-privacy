@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-10-29T01:07:03.465118+00:00",
+  "timestamp": "2024-10-31T01:06:31.475320+00:00",
   "repo": "richsalz/draft-rsalz-httpapi-privacy",
   "labels": [
     {
@@ -189,9 +189,17 @@
       "labels": [],
       "body": "The draft recommends revoking credentials if they are received over an insecure channel. This makes sense for requests which directly include an API key, for example as a Bearer token, because an eavesdropper can directly see and abuse the API key.\r\n\r\nAnother common form for API authentication is using an authentication pair consisting of a pair ID for identifying the user and a secret, which is only known to the service provider and the user. An authenticated request then includes the pair ID and a signature generated with a HMAC and the secret. The request does not directly include the secret. [AWS uses this approach](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html), for example.\r\n\r\nIf an attacker eavesdrops on such a request, they obtain knowledge about the pair ID, but not the secret. While leaking the pair ID may not be ideal, obtaining the ID and signature does not allow an attacker to abuse the authentication pair and forge signatures. Should in these cases the authentication pair still be revoked? Should the draft distinguish between requests that directly include the secret credentials and those which include signatures?",
       "createdAt": "2024-10-28T18:51:17Z",
-      "updatedAt": "2024-10-28T18:51:18Z",
+      "updatedAt": "2024-10-29T12:50:05Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "richsalz",
+          "authorAssociation": "OWNER",
+          "body": "So instead of key material, a key identifier is passed. I agree that it is reasonable to send that in the clear. The text should make it (sic) clear that sending a key identifier is NOT the same as sending a key, and that this can be okay.\r\n",
+          "createdAt": "2024-10-29T12:50:04Z",
+          "updatedAt": "2024-10-29T12:50:04Z"
+        }
+      ]
     }
   ],
   "pulls": [
