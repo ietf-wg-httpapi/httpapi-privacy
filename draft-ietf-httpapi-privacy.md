@@ -3,7 +3,7 @@ title: "API Keys and Privacy"
 abbrev: "privacy"
 category: bcp
 
-docname: draft-rsalz-httpapi-privacy-latest
+docname: draft-ietf-httpapi-privacy-latest
 submissiontype: IETF
 number:
 date:
@@ -16,8 +16,8 @@ venue:
   type: "Working Group"
   mail: "httpapi@ietf.org"
   arch: "https://mailarchive.ietf.org/arch/browse/httpapi/"
-  github: "richsalz/draft-rsalz-httpapi-privacy"
-  latest: "https://richsalz.github.io/draft-rsalz-httpapi-privacy/draft-rsalz-httpapi-privacy.html"
+  github: "ietf-wg-httpapi/httpapi-privacy"
+  latest: "https://ietf-wg-httpapi.github.io/draft-ietf-httpapi-privacy/draft-ietf-httpapi-privacy.html"
 
 author:
  -
