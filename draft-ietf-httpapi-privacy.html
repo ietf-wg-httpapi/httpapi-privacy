@@ -14,24 +14,24 @@ resources, can be an anti-pattern for authenticated API traffic. This document
 discusses the pitfalls and makes deployment recommendations for authenticated
 HTTP APIs. It does not specify a protocol. 
     " name="description">
-<meta content="xml2rfc 3.22.0" name="generator">
-<meta content="draft-rsalz-httpapi-privacy-latest" name="ietf.draft">
+<meta content="xml2rfc 3.24.0" name="generator">
+<meta content="draft-ietf-httpapi-privacy-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.22.0
-    Python 3.12.3
+  xml2rfc 3.24.0
+    Python 3.12.7
     ConfigArgParse 1.7
-    google-i18n-address 3.1.0
+    google-i18n-address 3.1.1
     intervaltree 3.1.0
     Jinja2 3.1.4
-    lxml 4.9.4
-    platformdirs 4.2.2
+    lxml 5.3.0
+    platformdirs 4.3.6
     pycountry 22.3.5
     PyYAML 6.0.1
     requests 2.32.3
     setuptools 70.3.0
     wcwidth 0.2.13
 -->
-<link href="draft-rsalz-httpapi-privacy.xml" rel="alternate" type="application/rfc+xml">
+<link href="draft-ietf-httpapi-privacy.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
 <style type="text/css">@font-face {
   font-family: 'Lora';
@@ -165,31 +165,6 @@ HTTP APIs. It does not specify a protocol.
 }
 
 @font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-vietnamese.woff2') format('woff2');
-  unicode-range: U+0102-0103, U+0110-0111, U+1EA0-1EF9, U+20AB;
-}
-@font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin-ext.woff2') format('woff2');
-  unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
-}
-@font-face {
-  font-family: 'Cabin Condensed';
-  font-style: normal;
-  font-weight: 600;
-  font-display: swap;
-  src: local('Cabin Condensed SemiBold'), local('CabinCondensed-SemiBold'), url('https://martinthomson.github.io/rfc-css/fonts/cabincondensed-semibold-latin.woff2') format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-
-@font-face {
   font-family: 'Oxygen Mono';
   font-style: normal;
   font-weight: 400;
@@ -206,6 +181,77 @@ HTTP APIs. It does not specify a protocol.
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: italic;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-italic-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic-ext.woff2') format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-cyrillic.woff2') format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-greek.woff2') format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Sofia Sans Semi Condensed';
+  font-style: normal;
+  font-weight: 1 1000;
+  src: url('https://martinthomson.github.io/rfc-css/fonts/sofiasanssemicondensed-regular-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
 :root {
   color-scheme: light dark;
   --background-color: #fff;
@@ -218,6 +264,7 @@ HTTP APIs. It does not specify a protocol.
   --pilcrow-strong: #bbb;
   --small-font-size: 14.5px;
   --font-mono: 'Oxygen Mono', monospace;
+  --font-title: "Sofia Sans Semi Condensed", sans-serif;
   scrollbar-color: #bbb #eee;
 }
 body {
@@ -236,8 +283,8 @@ body {
 
 /* headings */
 h1, h2, h3, h4, h5, h6 {
-  font-family: "Cabin Condensed", sans-serif;
-  font-weight: 600;
+  font-family: var(--font-title);
+  font-weight: 680;
   margin: 0.8em 0 0.3em;
   font-size-adjust: 0.5;
   color: var(--title-color);
@@ -645,6 +692,12 @@ sub, sup {
   padding: 0.75em 0 2em 0;
   margin-bottom: 1em;
 }
+@media screen {
+  #toc nav {
+    font-family: var(--font-title);
+    font-weight: 360;
+  }
+}
 #toc nav ul {
   margin: 0 0.5em 0 0;
   padding: 0;
@@ -1028,11 +1081,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">privacy</td>
-<td class="right">August 2024</td>
+<td class="right">November 2024</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salz, et al.</td>
-<td class="center">Expires 23 February 2025</td>
+<td class="center">Expires 10 May 2025</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1042,15 +1095,15 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dt class="label-workgroup">Workgroup:</dt>
 <dd class="workgroup">Building Blocks for HTTP APIs</dd>
 <dt class="label-internet-draft">Internet-Draft:</dt>
-<dd class="internet-draft">draft-rsalz-httpapi-privacy-latest</dd>
+<dd class="internet-draft">draft-ietf-httpapi-privacy-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2024-08-22" class="published">22 August 2024</time>
+<time datetime="2024-11-06" class="published">6 November 2024</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-02-23">23 February 2025</time></dd>
+<dd class="expires"><time datetime="2025-05-10">10 May 2025</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1063,7 +1116,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </div>
 <div class="author">
       <div class="author-name">M. Kleidl</div>
-<div class="org">TODO</div>
+<div class="org">Transloadit</div>
 </div>
 </dd>
 </dl>
@@ -1082,15 +1135,15 @@ HTTP APIs. It does not specify a protocol.<a href="#section-abstract-1" class="p
       </h2>
 <p id="section-note.1-1">This note is to be removed before publishing as an RFC.<a href="#section-note.1-1" class="pilcrow">¶</a></p>
 <p id="section-note.1-2">
-        The latest revision of this draft can be found at <span><a href="https://richsalz.github.io/draft-rsalz-httpapi-privacy/draft-rsalz-httpapi-privacy.html">https://richsalz.github.io/draft-rsalz-httpapi-privacy/draft-rsalz-httpapi-privacy.html</a></span>.
-        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-rsalz-httpapi-privacy/">https://datatracker.ietf.org/doc/draft-rsalz-httpapi-privacy/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
+        The latest revision of this draft can be found at <span><a href="https://ietf-wg-httpapi.github.io/draft-ietf-httpapi-privacy/draft-ietf-httpapi-privacy.html">https://ietf-wg-httpapi.github.io/draft-ietf-httpapi-privacy/draft-ietf-httpapi-privacy.html</a></span>.
+        Status information for this document may be found at <span><a href="https://datatracker.ietf.org/doc/draft-ietf-httpapi-privacy/">https://datatracker.ietf.org/doc/draft-ietf-httpapi-privacy/</a></span>.<a href="#section-note.1-2" class="pilcrow">¶</a></p>
 <p id="section-note.1-3">
         Discussion of this document takes place on the
         Building Blocks for HTTP APIs Working Group mailing list (<span><a href="mailto:httpapi@ietf.org">mailto:httpapi@ietf.org</a></span>),
         which is archived at <span><a href="https://mailarchive.ietf.org/arch/browse/httpapi/">https://mailarchive.ietf.org/arch/browse/httpapi/</a></span>.
         Subscribe at <span><a href="https://www.ietf.org/mailman/listinfo/httpapi/">https://www.ietf.org/mailman/listinfo/httpapi/</a></span>.<a href="#section-note.1-3" class="pilcrow">¶</a></p>
 <p id="section-note.1-4">Source for this draft and an issue tracker can be found at
-        <span><a href="https://github.com/richsalz/draft-rsalz-httpapi-privacy">https://github.com/richsalz/draft-rsalz-httpapi-privacy</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
+        <span><a href="https://github.com/ietf-wg-httpapi/httpapi-privacy">https://github.com/ietf-wg-httpapi/httpapi-privacy</a></span>.<a href="#section-note.1-4" class="pilcrow">¶</a></p>
 </section>
 <div id="status-of-memo">
 <section id="section-boilerplate.1">
@@ -1111,7 +1164,7 @@ HTTP APIs. It does not specify a protocol.<a href="#section-abstract-1" class="p
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 23 February 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 10 May 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1197,18 +1250,10 @@ HTTP APIs. It does not specify a protocol.<a href="#section-abstract-1" class="p
             </ul>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.7">
-            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref">Appendix A</a>.  <a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
+            <p id="section-toc.1-1.7.1"><a href="#appendix-A" class="auto internal xref"></a><a href="#name-acknowledgments" class="internal xref">Acknowledgments</a></p>
 </li>
           <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8">
-            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-notes" class="internal xref">Notes</a></p>
-<ul class="compact toc ulBare ulEmpty">
-<li class="compact toc ulBare ulEmpty" id="section-toc.1-1.8.2.1">
-                <p id="section-toc.1-1.8.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-from-some-email" class="internal xref">From some email</a></p>
-</li>
-            </ul>
-</li>
-          <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.9">
-            <p id="section-toc.1-1.9.1"><a href="#appendix-C" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
+            <p id="section-toc.1-1.8.1"><a href="#appendix-B" class="auto internal xref"></a><a href="#name-authors-addresses" class="internal xref">Authors' Addresses</a></p>
 </li>
         </ul>
 </nav>
@@ -1461,63 +1506,13 @@ rate-limiting the establishment of insecure connections.<a href="#section-4-2" c
 <div id="acknowledgments">
 <section id="appendix-A">
       <h2 id="name-acknowledgments">
-<a href="#appendix-A" class="section-number selfRef">Appendix A. </a><a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
+<a href="#name-acknowledgments" class="section-name selfRef">Acknowledgments</a>
       </h2>
 <p id="appendix-A-1">We are grateful to Joachim Viide for his <span>[<a href="#BLOG" class="cite xref">BLOG</a>]</span> blog posting that brought up the issue.<a href="#appendix-A-1" class="pilcrow">¶</a></p>
 </section>
 </div>
-<div id="notes">
-<section id="appendix-B">
-      <h2 id="name-notes">
-<a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-notes" class="section-name selfRef">Notes</a>
-      </h2>
-<p id="appendix-B-1">I don't disagree with the thrust of the article, but I take a different
-message from it. It's not that the redirect is bad; the redirect is beside
-the point.<a href="#appendix-B-1" class="pilcrow">¶</a></p>
-<p id="appendix-B-2">An unencrypted authenticated request should, in general, not succeed. It
-should at a minimum fail and ideally revoke the just-disclosed credentials.<a href="#appendix-B-2" class="pilcrow">¶</a></p>
-<p id="appendix-B-3">The redirect is bad in this case because the subsequent request succeeded.
-Returning a 200 over HTTP would be just as bad.<a href="#appendix-B-3" class="pilcrow">¶</a></p>
-<p id="appendix-B-4">Browsers warn if you enter a password field on a form that sends to http.
-Api clients don't, and many API's have an API key in the link or as a header field.<a href="#appendix-B-4" class="pilcrow">¶</a></p>
-<div id="from-some-email">
-<section id="appendix-B.1">
-        <h3 id="name-from-some-email">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-from-some-email" class="section-name selfRef">From some email</a>
-        </h3>
-<p id="appendix-B.1-1">I chose to explicitly address redirects in particular, as they seem to be the
-status quo that most APIs implement, probably due to redirects being the
-standard operating procedure" in webdev lore. Redirects are also often the
-simplest option due to server software like Caddy supporting them out of the
-box.<a href="#appendix-B.1-1" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-2">Ben Bucksch had good points. Failing unencrypted requests (or connection
-attempts) is a relatively low hanging fruit for improving the aforementioned
-status quo. Then at least accidental plain HTTP use can be noticed easily and
-fixed early, reducing the window of opportunity for attacks. API providers
-can also implement failures first and then move on to the more complex topic
-of token auto-revocation. Anthropic chose an interesting approach: their API
-now returns an error that also suggests rotating the API keys manually. I
-think its a good quick improvement, informing the API consumer of a
-recommended path forward.<a href="#appendix-B.1-2" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-3">As for using the HTTP status code 426, I almost implemented that for our API
-when I noticed that NPM uses it. However,
-https://httpwg.org/specs/rfc9110.html#status.426 states:<a href="#appendix-B.1-3" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-4">"the server MUST send an Upgrade header field"<a href="#appendix-B.1-4" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-5">Later in section 7.8 (https://httpwg.org/specs/rfc9110.html#rfc.section.7.8):<a href="#appendix-B.1-5" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-6">The Upgrade header field only applies to switching protocols on top of the
-  existing connection; it cannot be used to switch the underlying connection
-  (transport) protocol, nor to switch the existing communication to a
-  different connection.<a href="#appendix-B.1-6" class="pilcrow">¶</a></p>
-<p id="appendix-B.1-7">As the switch from HTTP to HTTPS would require a new connection, I felt that
-it was not a perfect match. Thats why I ended up emulating Stripe with status
-code 403, which "indicates that the server understood the request but refuses
-to fulfill it." A bit more open-ended, but not a perfect match either.<a href="#appendix-B.1-7" class="pilcrow">¶</a></p>
-</section>
-</div>
-</section>
-</div>
 <div id="authors-addresses">
-<section id="appendix-C">
+<section id="appendix-B">
       <h2 id="name-authors-addresses">
 <a href="#name-authors-addresses" class="section-name selfRef">Authors' Addresses</a>
       </h2>
@@ -1534,12 +1529,12 @@ to fulfill it." A bit more open-ended, but not a perfect match either.<a href="#
 <div dir="auto" class="left"><span class="org">Akamai Technologies</span></div>
 <div class="email">
 <span>Email:</span>
-<a href="mailto:mbishop@akamai.com" class="email">mbishop@akamai.com</a>
+<a href="mailto:mbishop@evequefou.be" class="email">mbishop@evequefou.be</a>
 </div>
 </address>
 <address class="vcard">
         <div dir="auto" class="left"><span class="fn nameRole">Marius Kleidl</span></div>
-<div dir="auto" class="left"><span class="org">TODO</span></div>
+<div dir="auto" class="left"><span class="org">Transloadit</span></div>
 <div class="email">
 <span>Email:</span>
 <a href="mailto:marius@transloadit.com" class="email">marius@transloadit.com</a>

@@ -5,13 +5,13 @@
 Building Blocks for HTTP APIs                                    R. Salz
 Internet-Draft                                                 M. Bishop
 Intended status: Best Current Practice               Akamai Technologies
-Expires: 23 February 2025                                      M. Kleidl
-                                                                    TODO
-                                                          22 August 2024
+Expires: 10 May 2025                                           M. Kleidl
+                                                             Transloadit
+                                                         6 November 2024
 
 
                           API Keys and Privacy
-                   draft-rsalz-httpapi-privacy-latest
+                   draft-ietf-httpapi-privacy-latest
 
 Abstract
 
@@ -25,11 +25,10 @@ About This Document
 
    This note is to be removed before publishing as an RFC.
 
-   The latest revision of this draft can be found at
-   https://richsalz.github.io/draft-rsalz-httpapi-privacy/draft-rsalz-
-   httpapi-privacy.html.  Status information for this document may be
-   found at https://datatracker.ietf.org/doc/draft-rsalz-httpapi-
-   privacy/.
+   The latest revision of this draft can be found at https://ietf-wg-
+   httpapi.github.io/draft-ietf-httpapi-privacy/draft-ietf-httpapi-
+   privacy.html.  Status information for this document may be found at
+   https://datatracker.ietf.org/doc/draft-ietf-httpapi-privacy/.
 
    Discussion of this document takes place on the Building Blocks for
    HTTP APIs Working Group mailing list (mailto:httpapi@ietf.org), which
@@ -37,7 +36,7 @@ About This Document
    Subscribe at https://www.ietf.org/mailman/listinfo/httpapi/.
 
    Source for this draft and an issue tracker can be found at
-   https://github.com/richsalz/draft-rsalz-httpapi-privacy.
+   https://github.com/ietf-wg-httpapi/httpapi-privacy.
 
 Status of This Memo
 
@@ -54,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 February 2025.
+   This Internet-Draft will expire on 10 May 2025.
 
 Copyright Notice
 
@@ -88,9 +87,7 @@ Table of Contents
    6.  References
      6.1.  Normative References
      6.2.  Informative References
-   Appendix A.  Acknowledgments
-   Appendix B.  Notes
-     B.1.  From some email
+   Acknowledgments
    Authors' Addresses
 
 1.  Introduction
@@ -287,66 +284,10 @@ Table of Contents
               DOI 10.17487/RFC8959, January 2021,
               <https://www.rfc-editor.org/rfc/rfc8959>.
 
-Appendix A.  Acknowledgments
+Acknowledgments
 
    We are grateful to Joachim Viide for his [BLOG] blog posting that
    brought up the issue.
-
-Appendix B.  Notes
-
-   I don't disagree with the thrust of the article, but I take a
-   different message from it.  It's not that the redirect is bad; the
-   redirect is beside the point.
-
-   An unencrypted authenticated request should, in general, not succeed.
-   It should at a minimum fail and ideally revoke the just-disclosed
-   credentials.
-
-   The redirect is bad in this case because the subsequent request
-   succeeded.  Returning a 200 over HTTP would be just as bad.
-
-   Browsers warn if you enter a password field on a form that sends to
-   http.  Api clients don't, and many API's have an API key in the link
-   or as a header field.
-
-B.1.  From some email
-
-   I chose to explicitly address redirects in particular, as they seem
-   to be the status quo that most APIs implement, probably due to
-   redirects being the standard operating procedure" in webdev lore.
-   Redirects are also often the simplest option due to server software
-   like Caddy supporting them out of the box.
-
-   Ben Bucksch had good points.  Failing unencrypted requests (or
-   connection attempts) is a relatively low hanging fruit for improving
-   the aforementioned status quo.  Then at least accidental plain HTTP
-   use can be noticed easily and fixed early, reducing the window of
-   opportunity for attacks.  API providers can also implement failures
-   first and then move on to the more complex topic of token auto-
-   revocation.  Anthropic chose an interesting approach: their API now
-   returns an error that also suggests rotating the API keys manually.
-   I think its a good quick improvement, informing the API consumer of a
-   recommended path forward.
-
-   As for using the HTTP status code 426, I almost implemented that for
-   our API when I noticed that NPM uses it.  However,
-   https://httpwg.org/specs/rfc9110.html#status.426 states:
-
-   "the server MUST send an Upgrade header field"
-
-   Later in section 7.8 (https://httpwg.org/specs/
-   rfc9110.html#rfc.section.7.8):
-
-   The Upgrade header field only applies to switching protocols on top
-   of the existing connection; it cannot be used to switch the
-   underlying connection (transport) protocol, nor to switch the
-   existing communication to a different connection.
-
-   As the switch from HTTP to HTTPS would require a new connection, I
-   felt that it was not a perfect match.  Thats why I ended up emulating
-   Stripe with status code 403, which "indicates that the server
-   understood the request but refuses to fulfill it."  A bit more open-
-   ended, but not a perfect match either.
 
 Authors' Addresses
 
@@ -357,9 +298,9 @@ Authors' Addresses
 
    Mike Bishop
    Akamai Technologies
-   Email: mbishop@akamai.com
+   Email: mbishop@evequefou.be
 
 
    Marius Kleidl
-   TODO
+   Transloadit
    Email: marius@transloadit.com
