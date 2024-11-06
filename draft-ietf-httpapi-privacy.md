@@ -21,10 +21,6 @@ venue:
 
 author:
  -
-    fullname: Rich Salz
-    organization: Akamai Technologies
-    email: rsalz@akamai.com
- -
     fullname: Mike Bishop
     organization: Akamai Technologies
     email: mbishop@evequefou.be
