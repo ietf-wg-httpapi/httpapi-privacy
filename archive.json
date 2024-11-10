@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2024-11-07T01:04:37.329028+00:00",
+  "timestamp": "2024-11-10T01:08:48.953546+00:00",
   "repo": "ietf-wg-httpapi/httpapi-privacy",
   "labels": [
     {
@@ -418,25 +418,33 @@
       "id": "PR_kwDOMPAWUs6BF003",
       "title": "Remove Rich Salz as author",
       "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/pull/9",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "richsalz",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2024-11-06T17:58:23Z",
-      "updatedAt": "2024-11-06T17:58:23Z",
+      "updatedAt": "2024-11-07T22:51:57Z",
       "baseRepository": "ietf-wg-httpapi/httpapi-privacy",
       "baseRefName": "main",
       "baseRefOid": "bd403a67bd2466488ae9d6fb5d1498594d93ab7b",
       "headRepository": "ietf-wg-httpapi/httpapi-privacy",
       "headRefName": "rm-rsalz",
       "headRefOid": "8191013c7ce54d0308930dd2335379fac66234c4",
-      "closedAt": null,
+      "closedAt": "2024-11-07T22:51:57Z",
       "mergedAt": null,
       "mergedBy": null,
       "mergeCommit": null,
-      "comments": [],
+      "comments": [
+        {
+          "author": "richsalz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I think I will able to contribute to this draft in the future, so I am closing/cancelling this.",
+          "createdAt": "2024-11-07T22:51:57Z",
+          "updatedAt": "2024-11-07T22:51:57Z"
+        }
+      ],
       "reviews": []
     }
   ]
