@@ -154,6 +154,14 @@ is potentially compromised. Servers SHOULD revoke such credentials immediately.
 When the credential is next used over a secure channel, a server MAY return an
 error that indicates why the credential was revoked.
 
+Credentials in a request can take on different forms. API keys and tokens are simple
+modes for authentication, but can be abused by attackers to forfeit requests and hence
+should be revoked if compromised. Requests can also be authenticated using derived values,
+where they only include digital signatures or message authentication codes (MACs)
+derived from credentials but not the credentials themselves. Since an attacker cannot
+abuse the derived values to forfeit requests, the server MAY choose to not revoke the
+credentials in this case.
+
 # Client Recommendations
 
 The following recommendations increase the success rate of the server
