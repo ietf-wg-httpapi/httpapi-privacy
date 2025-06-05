@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-01-30T01:03:10.343587+00:00",
+  "timestamp": "2025-06-05T01:10:59.846709+00:00",
   "repo": "ietf-wg-httpapi/httpapi-privacy",
   "labels": [
     {
@@ -173,24 +173,32 @@
       "labels": [],
       "body": "> Clients SHOULD support and query for HTTPS records [[RFC9460](https://www.ietf.org/archive/id/draft-rsalz-httpapi-privacy-00.html#RFC9460)] when establishing a connection and SHOULD respect HSTS headers [[RFC6797](https://www.ietf.org/archive/id/draft-rsalz-httpapi-privacy-00.html#RFC6797)] received from a server.\r\n\r\nThere's a bunch more that follows with SHOULD statements...\r\n\r\nHere's an idea:\r\n\r\n> Clients of HTTP APIs MUST implement and use HTTPS exclusively. This makes any upgrade mechanism unnecessary.\r\n>\r\n> Clients SHOULD support and query for HTTPS records [[RFC9460](https://www.ietf.org/archive/id/draft-rsalz-httpapi-privacy-00.html#RFC9460)] when establishing a connection. This gives servers an opportunity to provide more complete information about capabilities, some of which are security-relevant.\r\n\r\nThis avoids the whole HSTS thing and all the business about Secure cookies.  I get why unsecured HTTP might be in use on the Web (well, not entirely), but APIs that manage secrets have no business doing that.\r\n\r\nIt's 2024.",
       "createdAt": "2024-09-05T00:03:23Z",
-      "updatedAt": "2024-09-05T00:03:23Z",
+      "updatedAt": "2025-03-28T21:00:05Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "richsalz",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Interesting idea, but not necessary if you use #8 maybe.",
+          "createdAt": "2025-03-28T21:00:04Z",
+          "updatedAt": "2025-03-28T21:00:04Z"
+        }
+      ]
     },
     {
       "number": 8,
       "id": "I_kwDOMPAWUs6cHruY",
       "title": "Revoking signature-based authentication",
       "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/issues/8",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "Acconut",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "The draft recommends revoking credentials if they are received over an insecure channel. This makes sense for requests which directly include an API key, for example as a Bearer token, because an eavesdropper can directly see and abuse the API key.\r\n\r\nAnother common form for API authentication is using an authentication pair consisting of a pair ID for identifying the user and a secret, which is only known to the service provider and the user. An authenticated request then includes the pair ID and a signature generated with a HMAC and the secret. The request does not directly include the secret. [AWS uses this approach](https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html), for example.\r\n\r\nIf an attacker eavesdrops on such a request, they obtain knowledge about the pair ID, but not the secret. While leaking the pair ID may not be ideal, obtaining the ID and signature does not allow an attacker to abuse the authentication pair and forge signatures. Should in these cases the authentication pair still be revoked? Should the draft distinguish between requests that directly include the secret credentials and those which include signatures?",
       "createdAt": "2024-10-28T18:51:17Z",
-      "updatedAt": "2024-10-29T12:50:05Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-03T19:57:32Z",
+      "closedAt": "2025-06-03T19:57:32Z",
       "comments": [
         {
           "author": "richsalz",
@@ -198,8 +206,31 @@
           "body": "So instead of key material, a key identifier is passed. I agree that it is reasonable to send that in the clear. The text should make it (sic) clear that sending a key identifier is NOT the same as sending a key, and that this can be okay.\r\n",
           "createdAt": "2024-10-29T12:50:04Z",
           "updatedAt": "2024-10-29T12:50:04Z"
+        },
+        {
+          "author": "Acconut",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Opened https://github.com/ietf-wg-httpapi/httpapi-privacy/pull/10 to add this to the document.",
+          "createdAt": "2025-03-18T17:11:01Z",
+          "updatedAt": "2025-03-18T17:11:01Z"
         }
       ]
+    },
+    {
+      "number": 11,
+      "id": "I_kwDOMPAWUs6u_HQ5",
+      "title": "be explicit about what explicit means",
+      "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/issues/11",
+      "state": "OPEN",
+      "author": "LPardue",
+      "authorAssociation": "NONE",
+      "assignees": [],
+      "labels": [],
+      "body": "> When authentication is used, clients SHOULD require an explicit indication from the user or caller that an insecure context is expected. \n\nA facetious interpretation of this requirement is \"The user gave me a http scheme\". So how about we elidicate a bit more on what form of indication matches the spirit of your intent.",
+      "createdAt": "2025-03-20T14:57:07Z",
+      "updatedAt": "2025-03-20T14:57:07Z",
+      "closedAt": null,
+      "comments": []
     }
   ],
   "pulls": [
@@ -446,6 +477,50 @@
         }
       ],
       "reviews": []
+    },
+    {
+      "number": 10,
+      "id": "PR_kwDOMPAWUs6PJPx-",
+      "title": "Except signature-based authentication from revocation",
+      "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/pull/10",
+      "state": "MERGED",
+      "author": "Acconut",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [
+        "Acconut"
+      ],
+      "labels": [],
+      "body": "Closes https://github.com/ietf-wg-httpapi/httpapi-privacy/issues/8.\r\n\r\nAs briefly discussed during the last IETF 121 meeting in Dublin, revoking API keys that are compromised over HTTP is a good idea. However, it's not technically necessary to revoke credentials if a request only includes signatures or MACs derived from the credentials.\r\n\r\nThis PR adds an exception for these cases.",
+      "createdAt": "2025-03-18T17:10:39Z",
+      "updatedAt": "2025-06-03T19:57:32Z",
+      "baseRepository": "ietf-wg-httpapi/httpapi-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "bd403a67bd2466488ae9d6fb5d1498594d93ab7b",
+      "headRepository": "ietf-wg-httpapi/httpapi-privacy",
+      "headRefName": "signatures",
+      "headRefOid": "be2d3901511ea7a1daa53cc3cf39df17c9addeec",
+      "closedAt": "2025-06-03T19:57:31Z",
+      "mergedAt": "2025-06-03T19:57:31Z",
+      "mergedBy": "richsalz",
+      "mergeCommit": {
+        "oid": "7b358d935b42fd88f5ee699cc29f5f8d7907e82a"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMPAWUs6saHje",
+          "commit": {
+            "abbreviatedOid": "be2d390"
+          },
+          "author": "richsalz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "I wonder if we make the \"MAY not\" stronger?  Shrug.  Approved.",
+          "createdAt": "2025-06-03T13:59:04Z",
+          "updatedAt": "2025-06-03T13:59:04Z",
+          "comments": []
+        }
+      ]
     }
   ]
 }
