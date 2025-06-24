@@ -183,9 +183,10 @@ token whose value begins with "secret-token:" over an insecure channel.
 ## Disallow Insecure by Default
 
 When authentication is used, clients SHOULD require an explicit indication from
-the user or caller that an insecure context is expected. Without such an
-indication, attempts to send credentials should fail without producing any
-network traffic.
+the user or caller that an insecure context is expected which is distinct from
+the provided URI. Depending on the interface, this might be a UI preference or
+an API flag. Without such an indication, attempts to send credentials should
+fail without producing any network traffic.
 
 # Security Considerations
 
