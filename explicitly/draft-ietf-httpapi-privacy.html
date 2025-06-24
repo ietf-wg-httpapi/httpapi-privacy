@@ -1374,9 +1374,11 @@ recommendations above.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-implement-relevant-protocol" class="section-name selfRef">Implement Relevant Protocols</a>
         </h3>
 <p id="section-3.1-1">Clients SHOULD support and query for HTTPS records <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> when
-establishing a connection and SHOULD respect HSTS headers <span>[<a href="#RFC6797" class="cite xref">RFC6797</a>]</span> received
+establishing a connection. This gives servers an opportunity to provide more
+complete information about capabilities, some of which are security-relevant.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+<p id="section-3.1-2">Clients SHOULD respect HSTS headers <span>[<a href="#RFC6797" class="cite xref">RFC6797</a>]</span> received
 from a server. This includes implementing persistent storage of HSTS indications
-received from the server.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
+received from the server.<a href="#section-3.1-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="respect-credential-restrictions">
@@ -1397,8 +1399,9 @@ token whose value begins with "secret-token:" over an insecure channel.<a href="
 <p id="section-3.3-1">When authentication is used, clients SHOULD require an explicit indication from
 the user or caller that an insecure context is expected which is distinct from
 the provided URI. Depending on the interface, this might be a UI preference or
-an API flag. Without such an indication, attempts to send credentials should
-fail without producing any network traffic.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+an API flag.<a href="#section-3.3-1" class="pilcrow">¶</a></p>
+<p id="section-3.3-2">Absent such an indication, clients of HTTP APIs MUST implement and use HTTPS
+exclusively.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 </section>
 </div>
 </section>
