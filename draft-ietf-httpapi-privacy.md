@@ -182,7 +182,10 @@ recommendations above.
 ## Implement Relevant Protocols
 
 Clients SHOULD support and query for HTTPS records {{!RFC9460}} when
-establishing a connection and SHOULD respect HSTS headers {{!RFC6797}} received
+establishing a connection. This gives servers an opportunity to provide more
+complete information about capabilities, some of which are security-relevant.
+
+Clients SHOULD respect HSTS headers {{!RFC6797}} received
 from a server. This includes implementing persistent storage of HSTS indications
 received from the server.
 
@@ -195,9 +198,12 @@ token whose value begins with "secret-token:" over an insecure channel.
 ## Disallow Insecure by Default
 
 When authentication is used, clients SHOULD require an explicit indication from
-the user or caller that an insecure context is expected. Without such an
-indication, attempts to send credentials should fail without producing any
-network traffic.
+the user or caller that an insecure context is expected which is distinct from
+the provided URI. Depending on the interface, this might be a UI preference or
+an API flag.
+
+Absent such an indication, clients of HTTP APIs MUST implement and use HTTPS
+exclusively.
 
 # Security Considerations
 
