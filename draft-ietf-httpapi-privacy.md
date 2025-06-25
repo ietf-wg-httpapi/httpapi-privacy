@@ -138,18 +138,28 @@ authentication SHOULD include the Secure attribute described in {{Section
 4.1.2.5 of RFC6265}}. Bearer tokens MAY use the format described in {{?RFC8959}}
 to indicate the expected usage to the client.
 
-## Credential Revocation
+## Disclosure Response
 
 Some deployments may not find it feasible to completely block unencrypted
 connections, whether because the hostname is shared with unauthenticated
 endpoints or for infrastructure reasons. Therefore, servers need a response for
-when a valid credential has been received over an insecure channel.
+when a credential has been received over an insecure channel.
+
+HTTP status code 403 (Forbidden) indicates that "the server understood the
+request but refuses to fulfill it" {!HTTP=RFC9110}. While this is generally
+understood to mean that "the server considers [the credentials] insufficient to
+grant access," it also states that "a request might be forbidden for reasons
+unrelated to the credentials." Servers SHOULD return status code 403 to all
+requests received over an insecure channel, regardless of the validity of the
+presented credentials.
 
 Because a difference in behavior would enable attackers to guess and check
 possible credentials, a server MUST NOT return a different client response
 between a valid or invalid credential presented over an insecure connection.
 Differences in behavior MUST only be visible on subsequent use of the credential
 over a secure channel.
+
+### Credential Revocation
 
 When a request is received over an unencrypted channel, the presented credential
 is potentially compromised. Servers SHOULD revoke such credentials immediately.
