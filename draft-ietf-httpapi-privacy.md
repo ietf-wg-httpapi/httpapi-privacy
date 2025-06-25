@@ -141,7 +141,7 @@ to indicate the expected usage to the client.
 Some deployments may not find it feasible to completely block unencrypted
 connections, whether because the hostname is shared with unauthenticated
 endpoints or for infrastructure reasons. Therefore, servers need a response for
-when a valid credential has been received over an insecure channel.
+when a credential has been received over an insecure channel.
 
 HTTP status code 403 (Forbidden) indicates that "the server understood the
 request but refuses to fulfill it" {!HTTP=RFC9110}. While this is generally
