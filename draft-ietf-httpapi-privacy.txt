@@ -5,9 +5,9 @@
 Building Blocks for HTTP APIs                                    R. Salz
 Internet-Draft                                                 M. Bishop
 Intended status: Best Current Practice               Akamai Technologies
-Expires: 5 December 2025                                       M. Kleidl
+Expires: 27 December 2025                                      M. Kleidl
                                                              Transloadit
-                                                             3 June 2025
+                                                            25 June 2025
 
 
                           API Keys and Privacy
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 December 2025.
+   This Internet-Draft will expire on 27 December 2025.
 
 Copyright Notice
 
@@ -171,7 +171,9 @@ Table of Contents
    Servers MAY induce such an early failure by not accepting unencrypted
    connections, e.g. on port 80.  This makes it impossible for a client
    to send a credential over an insecure channel to the authentic
-   server, as no such channel can be opened.
+   server, as no such channel can be opened.  Servers MAY alternatively
+   restrict connections on port 80 to network sources which are more
+   trusted, such as a VPN or virtual network interface.
 
    However, this mitigation is limited against active network attackers,
    who can impersonate the server and accept the client's insecure
@@ -208,12 +210,12 @@ Table of Contents
 
    Credentials in a request can take on different forms.  API keys and
    tokens are simple modes for authentication, but can be abused by
-   attackers to forfeit requests and hence should be revoked if
+   attackers to forge requests and hence should be revoked if
    compromised.  Requests can also be authenticated using derived
    values, where they only include digital signatures or message
    authentication codes (MACs) derived from credentials but not the
    credentials themselves.  Since an attacker cannot abuse the derived
-   values to forfeit requests, the server MAY choose to not revoke the
+   values to forge requests, the server MAY choose to not revoke the
    credentials in this case.
 
 3.  Client Recommendations
