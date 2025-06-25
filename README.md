@@ -1,11 +1,13 @@
+<!-- regenerate: on (set to off if you edit this file) -->
+
 # API Keys and Privacy
 
-This is the working area for the individual Internet-Draft, "API Keys and Privacy".
+This is the working area for the IETF [HTTPAPI Working Group](https://datatracker.ietf.org/group/httpapi/documents/) Internet-Draft, "API Keys and Privacy".
 
-* [Editor's Copy](https://richsalz.github.io/draft-rsalz-httpapi-privacy/#go.draft-rsalz-httpapi-privacy.html)
-* [Datatracker Page](https://datatracker.ietf.org/doc/draft-rsalz-httpapi-privacy)
-* [Individual Draft](https://datatracker.ietf.org/doc/html/draft-rsalz-httpapi-privacy)
-* [Compare Editor's Copy to Individual Draft](https://richsalz.github.io/draft-rsalz-httpapi-privacy/#go.draft-rsalz-httpapi-privacy.diff)
+* [Editor's Copy](https://richsalz.github.io/draft-rsalz-httpapi-privacy/#go.draft-ietf-httpapi-privacy.html)
+* [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-httpapi-privacy)
+* [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-privacy)
+* [Compare Editor's Copy to Working Group Draft](https://richsalz.github.io/draft-rsalz-httpapi-privacy/#go.draft-ietf-httpapi-privacy.diff)
 
 
 ## Contributing
