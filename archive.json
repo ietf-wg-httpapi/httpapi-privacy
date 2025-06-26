@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-05T01:10:59.846709+00:00",
+  "timestamp": "2025-06-26T01:12:18.593184+00:00",
   "repo": "ietf-wg-httpapi/httpapi-privacy",
   "labels": [
     {
@@ -93,15 +93,15 @@
       "id": "I_kwDOMPAWUs6T6ihQ",
       "title": "HTTP Status Code",
       "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/issues/3",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "MikeBishop",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "Discussion in Notes indicates that 403, while unintuitive, appears to be the closest HTTP status code for \"I won't serve this over an unencrypted channel.\"  For reference:\r\n\r\n- 403 (Forbidden): \"the server understood the request but refuses to fulfill it\"\r\n  - \"server considers [the credentials] insufficient to grant access.\"\r\n  - \"However, a request might be forbidden for reasons unrelated to the credentials.\"\r\n- 421 (Misdirected Request): \"the request was directed at a server that is unable or unwilling to produce an authoritative response for the target URI\"\r\n  - \"a target URI that does not match an origin for which the server has been configured or does not match the connection context over which the request was received.\"\r\n  - More appropriate for receiving an \"https://\" URI over a non-TLS connection\r\n- 426 (Upgrade Required): \"server refuses to perform the request using the current protocol but might be willing to do so after the client upgrades to a different protocol.\"\r\n  - However, \"server MUST send an [Upgrade](https://httpwg.org/specs/rfc9110.html#field.upgrade) header field in a 426 response to indicate the required protocol(s)\" is probably a non-starter unless the server implements RFC2817, which is fairly niche\r\n\r\nShould we recommend one of these, mint a new status code, or stay silent on the topic?",
       "createdAt": "2024-08-22T19:52:20Z",
-      "updatedAt": "2024-08-23T22:40:05Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-25T14:14:23Z",
+      "closedAt": "2025-06-25T14:14:23Z",
       "comments": [
         {
           "author": "MikeBishop",
@@ -166,15 +166,15 @@
       "id": "I_kwDOMPAWUs6VZj27",
       "title": "SHOULD shmood",
       "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/issues/7",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "martinthomson",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "> Clients SHOULD support and query for HTTPS records [[RFC9460](https://www.ietf.org/archive/id/draft-rsalz-httpapi-privacy-00.html#RFC9460)] when establishing a connection and SHOULD respect HSTS headers [[RFC6797](https://www.ietf.org/archive/id/draft-rsalz-httpapi-privacy-00.html#RFC6797)] received from a server.\r\n\r\nThere's a bunch more that follows with SHOULD statements...\r\n\r\nHere's an idea:\r\n\r\n> Clients of HTTP APIs MUST implement and use HTTPS exclusively. This makes any upgrade mechanism unnecessary.\r\n>\r\n> Clients SHOULD support and query for HTTPS records [[RFC9460](https://www.ietf.org/archive/id/draft-rsalz-httpapi-privacy-00.html#RFC9460)] when establishing a connection. This gives servers an opportunity to provide more complete information about capabilities, some of which are security-relevant.\r\n\r\nThis avoids the whole HSTS thing and all the business about Secure cookies.  I get why unsecured HTTP might be in use on the Web (well, not entirely), but APIs that manage secrets have no business doing that.\r\n\r\nIt's 2024.",
       "createdAt": "2024-09-05T00:03:23Z",
-      "updatedAt": "2025-03-28T21:00:05Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-25T14:14:39Z",
+      "closedAt": "2025-06-25T14:14:39Z",
       "comments": [
         {
           "author": "richsalz",
@@ -182,6 +182,20 @@
           "body": "Interesting idea, but not necessary if you use #8 maybe.",
           "createdAt": "2025-03-28T21:00:04Z",
           "updatedAt": "2025-03-28T21:00:04Z"
+        },
+        {
+          "author": "MikeBishop",
+          "authorAssociation": "COLLABORATOR",
+          "body": "While I think that's a laudable goal, I don't think it's realistic. There are too many scenarios, including testing, where clear-text will still be used. I combined this with #11 and said that you MUST implement HTTPS exclusively absent a deliberate indication that an insecure context is deliberate. I also incorporated some of your other text.",
+          "createdAt": "2025-06-24T20:21:06Z",
+          "updatedAt": "2025-06-24T20:21:06Z"
+        },
+        {
+          "author": "martinthomson",
+          "authorAssociation": "NONE",
+          "body": "Well, I disagree, but I'm not going to keep fighting about it.\n\nI'm OK with exclusions for testing purposes (though mkcert exists, so I'm not 100% OK with that), but if that is the reason to use cleartext HTTP, make that an explicit exclusion.",
+          "createdAt": "2025-06-24T23:41:05Z",
+          "updatedAt": "2025-06-24T23:41:05Z"
         }
       ]
     },
@@ -221,15 +235,15 @@
       "id": "I_kwDOMPAWUs6u_HQ5",
       "title": "be explicit about what explicit means",
       "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/issues/11",
-      "state": "OPEN",
+      "state": "CLOSED",
       "author": "LPardue",
       "authorAssociation": "NONE",
       "assignees": [],
       "labels": [],
       "body": "> When authentication is used, clients SHOULD require an explicit indication from the user or caller that an insecure context is expected. \n\nA facetious interpretation of this requirement is \"The user gave me a http scheme\". So how about we elidicate a bit more on what form of indication matches the spirit of your intent.",
       "createdAt": "2025-03-20T14:57:07Z",
-      "updatedAt": "2025-03-20T14:57:07Z",
-      "closedAt": null,
+      "updatedAt": "2025-06-25T14:14:39Z",
+      "closedAt": "2025-06-25T14:14:39Z",
       "comments": []
     }
   ],
@@ -518,6 +532,178 @@
           "body": "I wonder if we make the \"MAY not\" stronger?  Shrug.  Approved.",
           "createdAt": "2025-06-03T13:59:04Z",
           "updatedAt": "2025-06-03T13:59:04Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "id": "PR_kwDOMPAWUs6b7gYU",
+      "title": "Explicitly explicit",
+      "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/pull/12",
+      "state": "MERGED",
+      "author": "MikeBishop",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #11.\r\nPartially fixes #7.",
+      "createdAt": "2025-06-24T20:15:49Z",
+      "updatedAt": "2025-06-25T14:14:40Z",
+      "baseRepository": "ietf-wg-httpapi/httpapi-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "0462b933c4a0bd64b2501f6ab22d540720b4c097",
+      "headRepository": "ietf-wg-httpapi/httpapi-privacy",
+      "headRefName": "explicitly",
+      "headRefOid": "7e31124f52c460f5a5fc6a88b7a1a4a0eccc177a",
+      "closedAt": "2025-06-25T14:14:37Z",
+      "mergedAt": "2025-06-25T14:14:37Z",
+      "mergedBy": "MikeBishop",
+      "mergeCommit": {
+        "oid": "02e30eb0c8b259ba38fa2498378004251ff49c77"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMPAWUs6wPlKV",
+          "commit": {
+            "abbreviatedOid": "7e31124"
+          },
+          "author": "Acconut",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-25T06:54:43Z",
+          "updatedAt": "2025-06-25T06:54:43Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 13,
+      "id": "PR_kwDOMPAWUs6b7r4-",
+      "title": "Define response code",
+      "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/pull/13",
+      "state": "MERGED",
+      "author": "MikeBishop",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "Fixes #3.",
+      "createdAt": "2025-06-24T20:36:58Z",
+      "updatedAt": "2025-06-25T14:14:26Z",
+      "baseRepository": "ietf-wg-httpapi/httpapi-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "0462b933c4a0bd64b2501f6ab22d540720b4c097",
+      "headRepository": "ietf-wg-httpapi/httpapi-privacy",
+      "headRefName": "response",
+      "headRefOid": "9b0313f904682701a54ff5a6cca7bd86419482db",
+      "closedAt": "2025-06-25T14:14:21Z",
+      "mergedAt": "2025-06-25T14:14:21Z",
+      "mergedBy": "MikeBishop",
+      "mergeCommit": {
+        "oid": "6f89f05d54bedbfc79eb88e9c2fcf491b7eb95e3"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMPAWUs6wPkWP",
+          "commit": {
+            "abbreviatedOid": "40aca8e"
+          },
+          "author": "Acconut",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-06-25T06:53:37Z",
+          "updatedAt": "2025-06-25T06:53:52Z",
+          "comments": [
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nwhen a credential has been received over an insecure channel.\r\n```\r\n\r\nThe paragraphs below mention that the response should be the same regardless of whether the credentials are valid or not. So I think we should not explicitly mention \"valid credentials\" here.",
+              "createdAt": "2025-06-25T06:53:38Z",
+              "updatedAt": "2025-06-25T06:53:52Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMPAWUs6wU4Jm",
+          "commit": {
+            "abbreviatedOid": "9b0313f"
+          },
+          "author": "richsalz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-25T13:55:15Z",
+          "updatedAt": "2025-06-25T13:55:15Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMPAWUs6wU9bi",
+          "commit": {
+            "abbreviatedOid": "9b0313f"
+          },
+          "author": "Acconut",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-25T13:59:31Z",
+          "updatedAt": "2025-06-25T13:59:31Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 14,
+      "id": "PR_kwDOMPAWUs6b70qZ",
+      "title": "Allow only trusted sources",
+      "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/pull/14",
+      "state": "MERGED",
+      "author": "MikeBishop",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "No issue filed for this, but implements the suggestion from @LPardue at IETF 121.",
+      "createdAt": "2025-06-24T20:55:14Z",
+      "updatedAt": "2025-06-25T14:14:10Z",
+      "baseRepository": "ietf-wg-httpapi/httpapi-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "0462b933c4a0bd64b2501f6ab22d540720b4c097",
+      "headRepository": "ietf-wg-httpapi/httpapi-privacy",
+      "headRefName": "other_trusted",
+      "headRefOid": "2692bc8f1d5cda3a2b9258261cd44251e1e4e5f5",
+      "closedAt": "2025-06-25T14:14:05Z",
+      "mergedAt": "2025-06-25T14:14:05Z",
+      "mergedBy": "MikeBishop",
+      "mergeCommit": {
+        "oid": "393ac6656f77d7b27dbffcca518b7e5c1f4a5b3e"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMPAWUs6wPf1o",
+          "commit": {
+            "abbreviatedOid": "2692bc8"
+          },
+          "author": "Acconut",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-25T06:46:34Z",
+          "updatedAt": "2025-06-25T06:46:34Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMPAWUs6wU3qH",
+          "commit": {
+            "abbreviatedOid": "2692bc8"
+          },
+          "author": "richsalz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-06-25T13:54:42Z",
+          "updatedAt": "2025-06-25T13:54:42Z",
           "comments": []
         }
       ]
