@@ -85,6 +85,13 @@ This document describes actions API servers and clients should take in order to
 safeguard credentials. These recommendations are not directed at resources where
 no authentication is used.
 
+Some have wondered if this document is really necessary. After all, we have
+been telling people not to send passwords and such in the clear for decades.
+Regrettably, this lesson seems to be largely forgotten by those developing
+Web-based APIs.  The blog post that motivated this document, {{BLOG}}, did a
+spot-check in May, 2024, and found over two dozen websites that were
+vulnerable to the issues listed here.
+
 
 ## Conventions and Definitions
 
@@ -147,7 +154,7 @@ when a credential has been received over an insecure channel.
 
 HTTP status code 403 (Forbidden) indicates that "the server understood the
 request but refuses to fulfill it" {!HTTP=RFC9110}. While this is generally
-understood to mean that "the server considers [the credentials] insufficient to
+understood to mean that "the server considers \[the credentials] insufficient to
 grant access," it also states that "a request might be forbidden for reasons
 unrelated to the credentials." Servers SHOULD return status code 403 to all
 requests received over an insecure channel, regardless of the validity of the
