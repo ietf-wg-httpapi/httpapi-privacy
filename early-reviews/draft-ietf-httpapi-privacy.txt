@@ -5,9 +5,9 @@
 Building Blocks for HTTP APIs                                    R. Salz
 Internet-Draft                                                 M. Bishop
 Intended status: Best Current Practice               Akamai Technologies
-Expires: 15 February 2026                                      M. Kleidl
+Expires: 18 February 2026                                      M. Kleidl
                                                              Transloadit
-                                                          14 August 2025
+                                                          17 August 2025
 
 
                           API Keys and Privacy
@@ -53,7 +53,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 15 February 2026.
+   This Internet-Draft will expire on 18 February 2026.
 
 Copyright Notice
 
@@ -247,9 +247,9 @@ Table of Contents
 3.1.  Implement Relevant Protocols
 
    Clients SHOULD support and query for HTTPS records [RFC9460] when
-   establishing a connection.  This gives HTTP API servers an opportunit
-   to provide more complete information about capabilities, some of
-   which are security-relevant.
+   establishing a connection.  This gives HTTP API servers an
+   opportunity to provide more complete information about capabilities,
+   some of which are security-relevant.
 
    Clients SHOULD respect HSTS headers [RFC6797] received from a server.
    This includes implementing persistent storage of HSTS indications
@@ -279,7 +279,7 @@ Table of Contents
    The behavior recommended in Section 2.4.1 creates the potential for a
    denial of service attack where an attacker guesses many possible
    credentials over an unencrypted connection in hopes of discovering
-   and revoking a valid one.  HTTP API ervers implementing this
+   and revoking a valid one.  HTTP API servers implementing this
    mitigation MUST also guard against such attacks, such as by limiting
    the number of requests before closing the connection and rate-
    limiting the establishment of insecure connections.
