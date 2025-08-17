@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-06-26T01:12:18.593184+00:00",
+  "timestamp": "2025-08-17T01:18:27.078286+00:00",
   "repo": "ietf-wg-httpapi/httpapi-privacy",
   "labels": [
     {
@@ -705,6 +705,124 @@
           "createdAt": "2025-06-25T13:54:42Z",
           "updatedAt": "2025-06-25T13:54:42Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 15,
+      "id": "PR_kwDOMPAWUs6jtr3R",
+      "title": "Early reviews",
+      "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/pull/15",
+      "state": "OPEN",
+      "author": "richsalz",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2025-08-14T16:19:07Z",
+      "updatedAt": "2025-08-14T23:27:48Z",
+      "baseRepository": "ietf-wg-httpapi/httpapi-privacy",
+      "baseRefName": "main",
+      "baseRefOid": "3cde05e79c7f0fbe8ca87db7661f8287801f4dfa",
+      "headRepository": "ietf-wg-httpapi/httpapi-privacy",
+      "headRefName": "early-reviews",
+      "headRefOid": "92a04ef9656ffb63a96418de37d8c6eaf4a0490d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOMPAWUs66DoYX",
+          "commit": {
+            "abbreviatedOid": "642f359"
+          },
+          "author": "huitema",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "Apart from the missing \"not\", this is fine. You are addressing a worrying practice. This needs beating our drums very loudly and getting web sites and applications to stop doing that. The draft, even if published as an RFC, will only do so much -- it is not clear that the offenders would read it. But it can be the anchor for an orchestrated effort to have people stop doing that.",
+          "createdAt": "2025-08-14T17:27:14Z",
+          "updatedAt": "2025-08-14T17:32:01Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Telling people *not* to send passwords in the clear!",
+              "createdAt": "2025-08-14T17:27:14Z",
+              "updatedAt": "2025-08-14T17:32:01Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMPAWUs66DvCG",
+          "commit": {
+            "abbreviatedOid": "642f359"
+          },
+          "author": "huitema",
+          "authorAssociation": "NONE",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-08-14T17:32:35Z",
+          "updatedAt": "2025-08-14T17:32:35Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOMPAWUs66EDkc",
+          "commit": {
+            "abbreviatedOid": "642f359"
+          },
+          "author": "richsalz",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-08-14T17:51:38Z",
+          "updatedAt": "2025-08-14T17:51:38Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "HA!  fixup commit added, thanks!",
+              "createdAt": "2025-08-14T17:51:38Z",
+              "updatedAt": "2025-08-14T17:51:39Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOMPAWUs66HGkN",
+          "commit": {
+            "abbreviatedOid": "92a04ef"
+          },
+          "author": "martinthomson",
+          "authorAssociation": "NONE",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2025-08-14T23:26:39Z",
+          "updatedAt": "2025-08-14T23:27:48Z",
+          "comments": [
+            {
+              "originalPosition": 88,
+              "body": "```suggestion\npossible credentials, an HTTP API server MUST NOT return a different client\n```\nThe most consequential contribution you've received, no doubt.",
+              "createdAt": "2025-08-14T23:26:39Z",
+              "updatedAt": "2025-08-14T23:27:48Z"
+            },
+            {
+              "originalPosition": 40,
+              "body": "```suggestion\nHTTP API servers with authenticated endpoints SHOULD\n```",
+              "createdAt": "2025-08-14T23:27:02Z",
+              "updatedAt": "2025-08-14T23:27:48Z"
+            },
+            {
+              "originalPosition": 110,
+              "body": "```suggestion\nestablishing a connection. This gives HTTP API servers an opportunity\n```",
+              "createdAt": "2025-08-14T23:27:34Z",
+              "updatedAt": "2025-08-14T23:27:48Z"
+            },
+            {
+              "originalPosition": 120,
+              "body": "```suggestion\nHTTP API servers implementing this mitigation MUST also guard against such attacks, such\n```",
+              "createdAt": "2025-08-14T23:27:42Z",
+              "updatedAt": "2025-08-14T23:27:48Z"
+            }
+          ]
         }
       ]
     }
