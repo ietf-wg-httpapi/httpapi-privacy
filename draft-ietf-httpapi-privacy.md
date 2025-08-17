@@ -120,7 +120,7 @@ relies on the client to implement persistent storage of the HSTS directive.
 
 Used together, however, both approaches make clients less likely to send any
 requests over an insecure channel.
-HTTP API servers  with authenticated endpoints SHOULD
+HTTP API servers with authenticated endpoints SHOULD
 employ both mechanisms.
 
 ## Connection Blocking
@@ -168,7 +168,7 @@ requests received over an insecure channel, regardless of the validity of the
 presented credentials.
 
 Because a difference in behavior would enable attackers to guess and check
-possible credentials, an HTTP API  server MUST NOT return a different client
+possible credentials, an HTTP API server MUST NOT return a different client
 response
 between a valid or invalid credential presented over an insecure connection.
 Differences in behavior MUST only be visible on subsequent use of the credential
@@ -198,7 +198,7 @@ recommendations above.
 ## Implement Relevant Protocols
 
 Clients SHOULD support and query for HTTPS records {{!RFC9460}} when
-establishing a connection. This gives HTTP API servers an opportunit
+establishing a connection. This gives HTTP API servers an opportunity
 to provide more
 complete information about capabilities, some of which are security-relevant.
 
@@ -229,7 +229,7 @@ This entire document is about security of HTTP API interactions.
 The behavior recommended in {{credential-revocation}} creates the potential for
 a denial of service attack where an attacker guesses many possible credentials
 over an unencrypted connection in hopes of discovering and revoking a valid one.
-HTTP API ervers implementing this mitigation MUST also guard against such attacks, such
+HTTP API servers implementing this mitigation MUST also guard against such attacks, such
 as by limiting the number of requests before closing the connection and
 rate-limiting the establishment of insecure connections.
 
