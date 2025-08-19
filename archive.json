@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-17T01:18:27.078286+00:00",
+  "timestamp": "2025-08-19T01:10:18.127623+00:00",
   "repo": "ietf-wg-httpapi/httpapi-privacy",
   "labels": [
     {
@@ -720,13 +720,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-08-14T16:19:07Z",
-      "updatedAt": "2025-08-14T23:27:48Z",
+      "updatedAt": "2025-08-17T16:42:19Z",
       "baseRepository": "ietf-wg-httpapi/httpapi-privacy",
       "baseRefName": "main",
       "baseRefOid": "3cde05e79c7f0fbe8ca87db7661f8287801f4dfa",
       "headRepository": "ietf-wg-httpapi/httpapi-privacy",
       "headRefName": "early-reviews",
-      "headRefOid": "92a04ef9656ffb63a96418de37d8c6eaf4a0490d",
+      "headRefOid": "2be2a90e9e45e0e3898e10d9b0036867fbeb27a0",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
