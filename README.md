@@ -4,20 +4,19 @@
 
 This is the working area for the IETF [HTTPAPI Working Group](https://datatracker.ietf.org/group/httpapi/documents/) Internet-Draft, "API Keys and Privacy".
 
-* [Editor's Copy](https://richsalz.github.io/draft-rsalz-httpapi-privacy/#go.draft-ietf-httpapi-privacy.html)
+* [Editor's Copy](https://ietf-wg-httpapi.github.io/httpapi-privacy/#go.draft-ietf-httpapi-privacy.html)
 * [Datatracker Page](https://datatracker.ietf.org/doc/draft-ietf-httpapi-privacy)
 * [Working Group Draft](https://datatracker.ietf.org/doc/html/draft-ietf-httpapi-privacy)
-* [Compare Editor's Copy to Working Group Draft](https://richsalz.github.io/draft-rsalz-httpapi-privacy/#go.draft-ietf-httpapi-privacy.diff)
+* [Compare Editor's Copy to Working Group Draft](https://ietf-wg-httpapi.github.io/httpapi-privacy/#go.draft-ietf-httpapi-privacy.diff)
 
 
 ## Contributing
 
 See the
-[guidelines for contributions](https://github.com/richsalz/draft-rsalz-httpapi-privacy/blob/main/CONTRIBUTING.md).
+[guidelines for contributions](https://github.com/ietf-wg-httpapi/httpapi-privacy/blob/main/CONTRIBUTING.md).
 
-Contributions can be made by creating pull requests.
-The GitHub interface supports creating pull requests using the Edit (✏) button.
-
+The contributing file also has tips on how to make contributions, if you
+don't already know how to do that.
 
 ## Command Line Usage
 
