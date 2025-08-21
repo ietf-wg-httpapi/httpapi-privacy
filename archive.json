@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-19T01:10:18.127623+00:00",
+  "timestamp": "2025-08-21T01:07:16.847641+00:00",
   "repo": "ietf-wg-httpapi/httpapi-privacy",
   "labels": [
     {
@@ -720,13 +720,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2025-08-14T16:19:07Z",
-      "updatedAt": "2025-08-17T16:42:19Z",
+      "updatedAt": "2025-08-20T18:21:42Z",
       "baseRepository": "ietf-wg-httpapi/httpapi-privacy",
       "baseRefName": "main",
       "baseRefOid": "3cde05e79c7f0fbe8ca87db7661f8287801f4dfa",
       "headRepository": "ietf-wg-httpapi/httpapi-privacy",
       "headRefName": "early-reviews",
-      "headRefOid": "2be2a90e9e45e0e3898e10d9b0036867fbeb27a0",
+      "headRefOid": "f22801ce486ffff7d00dd58507c4302206ac1d8e",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -823,6 +823,19 @@
               "updatedAt": "2025-08-14T23:27:48Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOMPAWUs661d-D",
+          "commit": {
+            "abbreviatedOid": "2be2a90"
+          },
+          "author": "MikeBishop",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2025-08-20T02:29:16Z",
+          "updatedAt": "2025-08-20T02:29:16Z",
+          "comments": []
         }
       ]
     }
