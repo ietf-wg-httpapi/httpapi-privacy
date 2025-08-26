@@ -48,7 +48,8 @@ informative:
 --- abstract
 
 Redirecting HTTP requests to HTTPS, a common pattern for human-facing web
-resources, can be an anti-pattern for authenticated API traffic. This document
+resources, can be an anti-pattern for authenticated HTTP API traffic.
+This document
 discusses the pitfalls and makes deployment recommendations for authenticated
 HTTP APIs. It does not specify a protocol.
 
@@ -71,7 +72,8 @@ intermediary implementations have a prominently displayed option to enable it
 automatically.
 
 When client authentication is used, more care must be taken. The client's
-initial request may include a Bearer token or other credential; once the request
+initial request may include a Bearer token or other credential (such as
+a Cookie); once the request
 has been sent on the network, any passive attacker who can see the traffic can
 acquire this credential and use it.
 
@@ -84,6 +86,13 @@ the misconfiguration.
 This document describes actions API servers and clients should take in order to
 safeguard credentials. These recommendations are not directed at resources where
 no authentication is used.
+
+Some have wondered if this document is really necessary. After all, we have
+been telling people not to send passwords and such in the clear for decades.
+Regrettably, this lesson seems to be largely forgotten by those developing
+Web-based APIs.  The blog post that motivated this document, {{BLOG}}, did a
+spot-check in May, 2024, and found over two dozen websites that were
+vulnerable to the issues listed here.
 
 
 ## Conventions and Definitions
@@ -110,7 +119,8 @@ new server, while HSTS requires a successful prior connection to the server and
 relies on the client to implement persistent storage of the HSTS directive.
 
 Used together, however, both approaches make clients less likely to send any
-requests over an insecure channel. Servers with authenticated endpoints SHOULD
+requests over an insecure channel.
+HTTP API servers with authenticated endpoints SHOULD
 employ both mechanisms.
 
 ## Connection Blocking
@@ -120,15 +130,17 @@ the developer or user is less likely to notice the misconfiguration. Where
 possible, it is advantageous for such a misconfiguration to fail immediately so
 that the error can be noticed and corrected.
 
-Servers MAY induce such an early failure by not accepting unencrypted
+HTTP API servers MAY induce such an early failure by not accepting unencrypted
 connections, e.g. on port 80. This makes it impossible for a client to send a
 credential over an insecure channel to the authentic server, as no such channel
-can be opened. Servers MAY alternatively restrict connections on port 80 to
+can be opened.
+HTTP API servers MAY alternatively restrict connections on port 80 to
 network sources which are more trusted, such as a VPN or virtual network
 interface.
 
 However, this mitigation is limited against active network attackers, who can
-impersonate the server and accept the client's insecure connection attempt.
+impersonate the HTTP API server and accept the client's insecure
+connection attempt.
 
 ## Credential Restriction
 
@@ -142,19 +154,22 @@ to indicate the expected usage to the client.
 
 Some deployments may not find it feasible to completely block unencrypted
 connections, whether because the hostname is shared with unauthenticated
-endpoints or for infrastructure reasons. Therefore, servers need a response for
+endpoints or for infrastructure reasons. Therefore, HTTP API servers need
+a response for
 when a credential has been received over an insecure channel.
 
 HTTP status code 403 (Forbidden) indicates that "the server understood the
-request but refuses to fulfill it" {!HTTP=RFC9110}. While this is generally
-understood to mean that "the server considers [the credentials] insufficient to
+request but refuses to fulfill it" {{!HTTP=RFC9110}}. While this is generally
+understood to mean that "the server considers \[the credentials] insufficient to
 grant access," it also states that "a request might be forbidden for reasons
-unrelated to the credentials." Servers SHOULD return status code 403 to all
+unrelated to the credentials." HTTP API servers SHOULD return status
+code 403 to all
 requests received over an insecure channel, regardless of the validity of the
 presented credentials.
 
 Because a difference in behavior would enable attackers to guess and check
-possible credentials, a server MUST NOT return a different client response
+possible credentials, an HTTP API server MUST NOT return a different client
+response
 between a valid or invalid credential presented over an insecure connection.
 Differences in behavior MUST only be visible on subsequent use of the credential
 over a secure channel.
@@ -162,8 +177,9 @@ over a secure channel.
 ### Credential Revocation
 
 When a request is received over an unencrypted channel, the presented credential
-is potentially compromised. Servers SHOULD revoke such credentials immediately.
-When the credential is next used over a secure channel, a server MAY return an
+is potentially compromised. HTTP API servers SHOULD revoke such
+credentials immediately.
+When the credential is next used over a secure channel, the server MAY return an
 error that indicates why the credential was revoked.
 
 Credentials in a request can take on different forms. API keys and tokens are simple
@@ -182,7 +198,8 @@ recommendations above.
 ## Implement Relevant Protocols
 
 Clients SHOULD support and query for HTTPS records {{!RFC9460}} when
-establishing a connection. This gives servers an opportunity to provide more
+establishing a connection. This gives HTTP API servers an opportunity
+to provide more
 complete information about capabilities, some of which are security-relevant.
 
 Clients SHOULD respect HSTS headers {{!RFC6797}} received
@@ -212,7 +229,7 @@ This entire document is about security of HTTP API interactions.
 The behavior recommended in {{credential-revocation}} creates the potential for
 a denial of service attack where an attacker guesses many possible credentials
 over an unencrypted connection in hopes of discovering and revoking a valid one.
-Servers implementing this mitigation MUST also guard against such attacks, such
+HTTP API servers implementing this mitigation MUST also guard against such attacks, such
 as by limiting the number of requests before closing the connection and
 rate-limiting the establishment of insecure connections.
 
