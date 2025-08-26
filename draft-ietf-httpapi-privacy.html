@@ -10,14 +10,15 @@
 <meta content="Marius Kleidl" name="author">
 <meta content="
        Redirecting HTTP requests to HTTPS, a common pattern for human-facing web
-resources, can be an anti-pattern for authenticated API traffic. This document
+resources, can be an anti-pattern for authenticated HTTP API traffic.
+This document
 discusses the pitfalls and makes deployment recommendations for authenticated
 HTTP APIs. It does not specify a protocol. 
     " name="description">
-<meta content="xml2rfc 3.29.0" name="generator">
+<meta content="xml2rfc 3.30.0" name="generator">
 <meta content="draft-ietf-httpapi-privacy-latest" name="ietf.draft">
 <!-- Generator version information:
-  xml2rfc 3.29.0
+  xml2rfc 3.30.0
     Python 3.12.11
     ConfigArgParse 1.7
     google-i18n-address 3.1.1
@@ -1048,11 +1049,11 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">privacy</td>
-<td class="right">June 2025</td>
+<td class="right">August 2025</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salz, et al.</td>
-<td class="center">Expires 27 December 2025</td>
+<td class="center">Expires 27 February 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1065,12 +1066,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-httpapi-privacy-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2025-06-25" class="published">25 June 2025</time>
+<time datetime="2025-08-26" class="published">26 August 2025</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2025-12-27">27 December 2025</time></dd>
+<dd class="expires"><time datetime="2026-02-27">27 February 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1092,7 +1093,8 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">Redirecting HTTP requests to HTTPS, a common pattern for human-facing web
-resources, can be an anti-pattern for authenticated API traffic. This document
+resources, can be an anti-pattern for authenticated HTTP API traffic.
+This document
 discusses the pitfalls and makes deployment recommendations for authenticated
 HTTP APIs. It does not specify a protocol.<a href="#section-abstract-1" class="pilcrow">¶</a></p>
 </section>
@@ -1131,7 +1133,7 @@ HTTP APIs. It does not specify a protocol.<a href="#section-abstract-1" class="p
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 27 December 2025.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 27 February 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1249,7 +1251,8 @@ of encryption. This pattern is so well established that many HTTP server and
 intermediary implementations have a prominently displayed option to enable it
 automatically.<a href="#section-1-2" class="pilcrow">¶</a></p>
 <p id="section-1-3">When client authentication is used, more care must be taken. The client's
-initial request may include a Bearer token or other credential; once the request
+initial request may include a Bearer token or other credential (such as
+a Cookie); once the request
 has been sent on the network, any passive attacker who can see the traffic can
 acquire this credential and use it.<a href="#section-1-3" class="pilcrow">¶</a></p>
 <p id="section-1-4">If the server performs a redirect in this situation, it does not mitigate
@@ -1260,6 +1263,12 @@ the misconfiguration.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">This document describes actions API servers and clients should take in order to
 safeguard credentials. These recommendations are not directed at resources where
 no authentication is used.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">Some have wondered if this document is really necessary. After all, we have
+been telling people not to send passwords and such in the clear for decades.
+Regrettably, this lesson seems to be largely forgotten by those developing
+Web-based APIs.  The blog post that motivated this document, <span>[<a href="#BLOG" class="cite xref">BLOG</a>]</span>, did a
+spot-check in May, 2024, and found over two dozen websites that were
+vulnerable to the issues listed here.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <div id="conventions-and-definitions">
 <section id="section-1.1">
         <h3 id="name-conventions-and-definitions">
@@ -1305,7 +1314,8 @@ DNS server could block resolution of HTTPS records on a client connecting to a
 new server, while HSTS requires a successful prior connection to the server and
 relies on the client to implement persistent storage of the HSTS directive.<a href="#section-2.1-3" class="pilcrow">¶</a></p>
 <p id="section-2.1-4">Used together, however, both approaches make clients less likely to send any
-requests over an insecure channel. Servers with authenticated endpoints SHOULD
+requests over an insecure channel.
+HTTP API servers with authenticated endpoints SHOULD
 employ both mechanisms.<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
@@ -1318,14 +1328,16 @@ employ both mechanisms.<a href="#section-2.1-4" class="pilcrow">¶</a></p>
 the developer or user is less likely to notice the misconfiguration. Where
 possible, it is advantageous for such a misconfiguration to fail immediately so
 that the error can be noticed and corrected.<a href="#section-2.2-1" class="pilcrow">¶</a></p>
-<p id="section-2.2-2">Servers MAY induce such an early failure by not accepting unencrypted
+<p id="section-2.2-2">HTTP API servers MAY induce such an early failure by not accepting unencrypted
 connections, e.g. on port 80. This makes it impossible for a client to send a
 credential over an insecure channel to the authentic server, as no such channel
-can be opened. Servers MAY alternatively restrict connections on port 80 to
+can be opened.
+HTTP API servers MAY alternatively restrict connections on port 80 to
 network sources which are more trusted, such as a VPN or virtual network
 interface.<a href="#section-2.2-2" class="pilcrow">¶</a></p>
 <p id="section-2.2-3">However, this mitigation is limited against active network attackers, who can
-impersonate the server and accept the client's insecure connection attempt.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
+impersonate the HTTP API server and accept the client's insecure
+connection attempt.<a href="#section-2.2-3" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="credential-restriction">
@@ -1346,17 +1358,20 @@ to indicate the expected usage to the client.<a href="#section-2.3-1" class="pil
         </h3>
 <p id="section-2.4-1">Some deployments may not find it feasible to completely block unencrypted
 connections, whether because the hostname is shared with unauthenticated
-endpoints or for infrastructure reasons. Therefore, servers need a response for
+endpoints or for infrastructure reasons. Therefore, HTTP API servers need
+a response for
 when a credential has been received over an insecure channel.<a href="#section-2.4-1" class="pilcrow">¶</a></p>
 <p id="section-2.4-2">HTTP status code 403 (Forbidden) indicates that "the server understood the
-request but refuses to fulfill it" {!HTTP=RFC9110}. While this is generally
+request but refuses to fulfill it" <span>[<a href="#HTTP" class="cite xref">HTTP</a>]</span>. While this is generally
 understood to mean that "the server considers [the credentials] insufficient to
 grant access," it also states that "a request might be forbidden for reasons
-unrelated to the credentials." Servers SHOULD return status code 403 to all
+unrelated to the credentials." HTTP API servers SHOULD return status
+code 403 to all
 requests received over an insecure channel, regardless of the validity of the
 presented credentials.<a href="#section-2.4-2" class="pilcrow">¶</a></p>
 <p id="section-2.4-3">Because a difference in behavior would enable attackers to guess and check
-possible credentials, a server MUST NOT return a different client response
+possible credentials, an HTTP API server MUST NOT return a different client
+response
 between a valid or invalid credential presented over an insecure connection.
 Differences in behavior MUST only be visible on subsequent use of the credential
 over a secure channel.<a href="#section-2.4-3" class="pilcrow">¶</a></p>
@@ -1366,8 +1381,9 @@ over a secure channel.<a href="#section-2.4-3" class="pilcrow">¶</a></p>
 <a href="#section-2.4.1" class="section-number selfRef">2.4.1. </a><a href="#name-credential-revocation" class="section-name selfRef">Credential Revocation</a>
           </h4>
 <p id="section-2.4.1-1">When a request is received over an unencrypted channel, the presented credential
-is potentially compromised. Servers SHOULD revoke such credentials immediately.
-When the credential is next used over a secure channel, a server MAY return an
+is potentially compromised. HTTP API servers SHOULD revoke such
+credentials immediately.
+When the credential is next used over a secure channel, the server MAY return an
 error that indicates why the credential was revoked.<a href="#section-2.4.1-1" class="pilcrow">¶</a></p>
 <p id="section-2.4.1-2">Credentials in a request can take on different forms. API keys and tokens are simple
 modes for authentication, but can be abused by attackers to forge requests and hence
@@ -1395,7 +1411,8 @@ recommendations above.<a href="#section-3-1" class="pilcrow">¶</a></p>
 <a href="#section-3.1" class="section-number selfRef">3.1. </a><a href="#name-implement-relevant-protocol" class="section-name selfRef">Implement Relevant Protocols</a>
         </h3>
 <p id="section-3.1-1">Clients SHOULD support and query for HTTPS records <span>[<a href="#RFC9460" class="cite xref">RFC9460</a>]</span> when
-establishing a connection. This gives servers an opportunity to provide more
+establishing a connection. This gives HTTP API servers an opportunity
+to provide more
 complete information about capabilities, some of which are security-relevant.<a href="#section-3.1-1" class="pilcrow">¶</a></p>
 <p id="section-3.1-2">Clients SHOULD respect HSTS headers <span>[<a href="#RFC6797" class="cite xref">RFC6797</a>]</span> received
 from a server. This includes implementing persistent storage of HSTS indications
@@ -1436,7 +1453,7 @@ exclusively.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 <p id="section-4-2">The behavior recommended in <a href="#credential-revocation" class="auto internal xref">Section 2.4.1</a> creates the potential for
 a denial of service attack where an attacker guesses many possible credentials
 over an unencrypted connection in hopes of discovering and revoking a valid one.
-Servers implementing this mitigation MUST also guard against such attacks, such
+HTTP API servers implementing this mitigation MUST also guard against such attacks, such
 as by limiting the number of requests before closing the connection and
 rate-limiting the establishment of insecure connections.<a href="#section-4-2" class="pilcrow">¶</a></p>
 </section>
@@ -1460,6 +1477,10 @@ rate-limiting the establishment of insecure connections.<a href="#section-4-2" c
 <a href="#section-6.1" class="section-number selfRef">6.1. </a><a href="#name-normative-references" class="section-name selfRef">Normative References</a>
         </h3>
 <dl class="references">
+<dt id="HTTP">[HTTP]</dt>
+        <dd>
+<span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
+<dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
 <span class="refAuthor">Bradner, S.</span>, <span class="refTitle">"Key words for use in RFCs to Indicate Requirement Levels"</span>, <span class="seriesInfo">BCP 14</span>, <span class="seriesInfo">RFC 2119</span>, <span class="seriesInfo">DOI 10.17487/RFC2119</span>, <time datetime="1997-03" class="refDate">March 1997</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc2119">https://www.rfc-editor.org/rfc/rfc2119</a>&gt;</span>. </dd>
