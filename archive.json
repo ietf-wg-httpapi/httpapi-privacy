@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2025-08-21T01:07:16.847641+00:00",
+  "timestamp": "2025-08-28T01:06:14.014545+00:00",
   "repo": "ietf-wg-httpapi/httpapi-privacy",
   "labels": [
     {
@@ -713,24 +713,26 @@
       "id": "PR_kwDOMPAWUs6jtr3R",
       "title": "Early reviews",
       "url": "https://github.com/ietf-wg-httpapi/httpapi-privacy/pull/15",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "richsalz",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2025-08-14T16:19:07Z",
-      "updatedAt": "2025-08-20T18:21:42Z",
+      "updatedAt": "2025-08-26T17:21:45Z",
       "baseRepository": "ietf-wg-httpapi/httpapi-privacy",
       "baseRefName": "main",
       "baseRefOid": "3cde05e79c7f0fbe8ca87db7661f8287801f4dfa",
       "headRepository": "ietf-wg-httpapi/httpapi-privacy",
       "headRefName": "early-reviews",
       "headRefOid": "f22801ce486ffff7d00dd58507c4302206ac1d8e",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2025-08-26T17:21:39Z",
+      "mergedAt": "2025-08-26T17:21:39Z",
+      "mergedBy": "richsalz",
+      "mergeCommit": {
+        "oid": "146bd2b4ceb8bac680829b5d1d2ad222dc213422"
+      },
       "comments": [],
       "reviews": [
         {
@@ -792,7 +794,7 @@
             "abbreviatedOid": "92a04ef"
           },
           "author": "martinthomson",
-          "authorAssociation": "NONE",
+          "authorAssociation": "CONTRIBUTOR",
           "state": "COMMENTED",
           "body": "",
           "createdAt": "2025-08-14T23:26:39Z",
