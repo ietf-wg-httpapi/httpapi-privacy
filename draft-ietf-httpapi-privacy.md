@@ -207,7 +207,7 @@ from a server. This includes implementing persistent storage of HSTS indications
 received from the server.
 
 Clients that do not follow either, or both, of these recommendations might not
-understand the requirements of the server and mya have their traffic denied
+understand the requirements of the server and could have their traffic denied
 upon receipt, perhaps after having exposed authentication material in
 cleartext on the Internet.
 
