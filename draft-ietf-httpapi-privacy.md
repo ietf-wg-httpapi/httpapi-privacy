@@ -152,7 +152,7 @@ to indicate the expected usage to the client.
 
 ## Disclosure Response
 
-Some deployments may not find it feasible to completely block unencrypted
+Some deployments might not find it feasible to completely block unencrypted
 connections, whether because the hostname is shared with unauthenticated
 endpoints or for infrastructure reasons. Therefore, HTTP API servers need
 a response for
@@ -202,15 +202,22 @@ establishing a connection. This gives HTTP API servers an opportunity
 to provide more
 complete information about capabilities, some of which are security-relevant.
 
-Clients SHOULD respect HSTS headers {{!RFC6797}} received
+Clients SHOULD respect HSTS header fields {{!RFC6797}} received
 from a server. This includes implementing persistent storage of HSTS indications
 received from the server.
+
+Clients that do not follow either, or both, of these recommendations might not
+understand the requirements of the server and mya have their traffic denied
+upon receipt, perhaps after having exposed authentication material in
+cleartext on the Internet.
 
 ## Respect Credential Restrictions
 
 Clients MUST NOT send a Cookie with the Secure attribute {{RFC6265}} over an
-insecure channel. Clients MUST NOT send an Authorization header containing a
-token whose value begins with "secret-token:" over an insecure channel.
+insecure channel.
+
+Clients MUST NOT send an Authorization {{?RFC7617}}, or any other
+header field, that contains a secret token over an insecure channel.
 
 ## Disallow Insecure by Default
 
