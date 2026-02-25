@@ -213,11 +213,13 @@ cleartext on the Internet.
 
 ## Respect Credential Restrictions
 
-Clients MUST NOT send a Cookie with the Secure attribute {{RFC6265}} over an
+{{RFC6265}} prohibits sending a Cookie with the Secure attribute over an
 insecure channel.
 
-Clients MUST NOT send an Authorization {{?RFC7617}}, or any other
-header field, that contains a secret token over an insecure channel.
+Clients MUST NOT send any header field that contains a secret token over an
+insecure channel. Such header fields include Authorization and
+Proxy-Authorization and are described in Sections 11.6.2 and
+11.7.2 of {{!RFC9110}}, respectively.
 
 ## Disallow Insecure by Default
 
