@@ -87,8 +87,9 @@ This document describes actions API servers and clients should take in order to
 safeguard credentials. These recommendations are not directed at resources where
 no authentication is used.
 
-Some have wondered if this document is really necessary. After all, we have
-been telling people not to send passwords and such in the clear for decades.
+Some have wondered if this document is really necessary.
+After all, people have been told
+not to send passwords and such in the clear for decades.
 Regrettably, this lesson seems to be largely forgotten by those developing
 Web-based APIs.  The blog post that motivated this document, {{BLOG}}, did a
 spot-check in May, 2024, and found over two dozen websites that were
