@@ -89,8 +89,8 @@ no authentication is used. However, {{!PERPASS=RFC7258}} establishes broader
 reasons to use HTTPS regardless of whether credentials are transmitted.
 
 It has been established guidance not to send credentials in the clear for
-decades. A spot-check in May 2024 ({{BLOG}}) found over two dozen websites that
-were vulnerable to the issues listed here.
+decades. Nonetheless, a spot-check in May 2024 ({{BLOG}}) found over two dozen
+websites that were vulnerable to the issues listed here.
 
 
 ## Conventions and Definitions
