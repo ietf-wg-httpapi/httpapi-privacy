@@ -85,7 +85,7 @@ the misconfiguration.
 
 This document describes actions API servers and clients should take in order to
 safeguard credentials. These recommendations are not directed at resources where
-no authentication is used. However, {{!PERPASS=RFC7258}} establishes broader 
+no authentication is used. However, {{!PERPASS=RFC7258}} establishes broader
 reasons to use HTTPS regardless of whether credentials are transmitted.
 
 It has been established guidance not to send credentials in the clear for
