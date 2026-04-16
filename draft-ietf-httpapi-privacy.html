@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta content="Common,Latin" name="scripts">
 <meta content="initial-scale=1.0" name="viewport">
-<title>API Keys and Privacy</title>
+<title>Protecting Credentials with HTTP APIs</title>
 <meta content="Rich Salz" name="author">
 <meta content="Mike Bishop" name="author">
 <meta content="Marius Kleidl" name="author">
@@ -1090,7 +1090,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </dd>
 </dl>
 </div>
-<h1 id="title">API Keys and Privacy</h1>
+<h1 id="title">Protecting Credentials with HTTP APIs</h1>
 <section id="section-abstract">
       <h2 id="abstract"><a href="#abstract" class="selfRef">Abstract</a></h2>
 <p id="section-abstract-1">Redirecting HTTP requests to HTTPS, a common pattern for human-facing web
@@ -1263,13 +1263,11 @@ accidentally configures an unencrypted API endpoint will not necessarily notice
 the misconfiguration.<a href="#section-1-4" class="pilcrow">¶</a></p>
 <p id="section-1-5">This document describes actions API servers and clients should take in order to
 safeguard credentials. These recommendations are not directed at resources where
-no authentication is used.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">Some have wondered if this document is really necessary. After all, we have
-been telling people not to send passwords and such in the clear for decades.
-Regrettably, this lesson seems to be largely forgotten by those developing
-Web-based APIs.  The blog post that motivated this document, <span>[<a href="#BLOG" class="cite xref">BLOG</a>]</span>, did a
-spot-check in May, 2024, and found over two dozen websites that were
-vulnerable to the issues listed here.<a href="#section-1-6" class="pilcrow">¶</a></p>
+no authentication is used. However, <span>[<a href="#PERPASS" class="cite xref">PERPASS</a>]</span> establishes broader
+reasons to use HTTPS regardless of whether credentials are transmitted.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">It has been established guidance not to send credentials in the clear for
+decades. Nonetheless, a spot-check in May 2024 (<span>[<a href="#BLOG" class="cite xref">BLOG</a>]</span>) found over two dozen
+websites that were vulnerable to the issues listed here.<a href="#section-1-6" class="pilcrow">¶</a></p>
 <div id="conventions-and-definitions">
 <section id="section-1.1">
         <h3 id="name-conventions-and-definitions">
@@ -1488,6 +1486,10 @@ rate-limiting the establishment of insecure connections.<a href="#section-4-2" c
 <dt id="HTTP">[HTTP]</dt>
         <dd>
 <span class="refAuthor">Fielding, R., Ed.</span>, <span class="refAuthor">Nottingham, M., Ed.</span>, and <span class="refAuthor">J. Reschke, Ed.</span>, <span class="refTitle">"HTTP Semantics"</span>, <span class="seriesInfo">STD 97</span>, <span class="seriesInfo">RFC 9110</span>, <span class="seriesInfo">DOI 10.17487/RFC9110</span>, <time datetime="2022-06" class="refDate">June 2022</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc9110">https://www.rfc-editor.org/rfc/rfc9110</a>&gt;</span>. </dd>
+<dd class="break"></dd>
+<dt id="PERPASS">[PERPASS]</dt>
+        <dd>
+<span class="refAuthor">Farrell, S.</span> and <span class="refAuthor">H. Tschofenig</span>, <span class="refTitle">"Pervasive Monitoring Is an Attack"</span>, <span class="seriesInfo">BCP 188</span>, <span class="seriesInfo">RFC 7258</span>, <span class="seriesInfo">DOI 10.17487/RFC7258</span>, <time datetime="2014-05" class="refDate">May 2014</time>, <span>&lt;<a href="https://www.rfc-editor.org/rfc/rfc7258">https://www.rfc-editor.org/rfc/rfc7258</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
