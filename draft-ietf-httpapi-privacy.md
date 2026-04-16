@@ -1,5 +1,5 @@
 ---
-title: "API Keys and Privacy"
+title: "Protecting Credentials with HTTP APIs"
 abbrev: "privacy"
 category: bcp
 
@@ -85,14 +85,12 @@ the misconfiguration.
 
 This document describes actions API servers and clients should take in order to
 safeguard credentials. These recommendations are not directed at resources where
-no authentication is used.
+no authentication is used. However, {{!PERPASS=RFC7258}} establishes broader
+reasons to use HTTPS regardless of whether credentials are transmitted.
 
-Some have wondered if this document is really necessary. After all, we have
-been telling people not to send passwords and such in the clear for decades.
-Regrettably, this lesson seems to be largely forgotten by those developing
-Web-based APIs.  The blog post that motivated this document, {{BLOG}}, did a
-spot-check in May, 2024, and found over two dozen websites that were
-vulnerable to the issues listed here.
+It has been established guidance not to send credentials in the clear for
+decades. Nonetheless, a spot-check in May 2024 ({{BLOG}}) found over two dozen
+websites that were vulnerable to the issues listed here.
 
 
 ## Conventions and Definitions
