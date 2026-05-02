@@ -50,7 +50,7 @@ informative:
 Redirecting HTTP requests to HTTPS, a common pattern for human-facing web
 resources, can be an anti-pattern for authenticated HTTP API traffic.
 This document
-discusses the pitfalls and makes deployment recommendations for authenticated
+discusses the pitfalls of doing that and makes deployment recommendations for authenticated
 HTTP APIs. It does not specify a protocol.
 
 --- middle
@@ -102,8 +102,9 @@ websites that were vulnerable to the issues listed here.
 
 ## Pre-Connection Redirects
 
-Various mechanisms exist to inform clients that unencrypted requests to a server
-are never appropriate:
+To inform clients that unencrypted requests to a server
+are never appropriate, there are various mechanisms available,
+including:
 
 - HTTP Strict Transport Security (HSTS) {{!RFC6797}} informs clients who make a
   successful connection over HTTPS that secure connections are a requirement in
@@ -231,7 +232,8 @@ exclusively.
 
 # Security Considerations
 
-This entire document is about security of HTTP API interactions.
+This document describes how to mitigate exposting
+client credentials to the network through plaintext HTTP requests.
 
 The behavior recommended in {{credential-revocation}} creates the potential for
 a denial of service attack where an attacker guesses many possible credentials
