@@ -5,9 +5,9 @@
 Building Blocks for HTTP APIs                                    R. Salz
 Internet-Draft                                                 M. Bishop
 Intended status: Best Current Practice               Akamai Technologies
-Expires: 2 November 2026                                       M. Kleidl
+Expires: 3 November 2026                                       M. Kleidl
                                                              Transloadit
-                                                              1 May 2026
+                                                              2 May 2026
 
 
                  Protecting Credentials with HTTP APIs
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 2 November 2026.
+   This Internet-Draft will expire on 3 November 2026.
 
 Copyright Notice
 
@@ -149,8 +149,8 @@ Table of Contents
 
 2.1.  Pre-Connection Redirects
 
-   Various mechanisms exist to inform clients that unencrypted requests
-   to a server are never appropriate:
+   To inform clients that unencrypted requests to a server are never
+   appropriate, there are various mechanisms available, including:
 
    *  HTTP Strict Transport Security (HSTS) [RFC6797] informs clients
       who make a successful connection over HTTPS that secure
@@ -282,7 +282,8 @@ Table of Contents
 
 4.  Security Considerations
 
-   This entire document is about security of HTTP API interactions.
+   This document describes how to mitigate exposting client credentials
+   to the network through plaintext HTTP requests.
 
    The behavior recommended in Section 2.4.1 creates the potential for a
    denial of service attack where an attacker guesses many possible
