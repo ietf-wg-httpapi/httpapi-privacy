@@ -5,9 +5,9 @@
 Building Blocks for HTTP APIs                                    R. Salz
 Internet-Draft                                                 M. Bishop
 Intended status: Best Current Practice               Akamai Technologies
-Expires: 3 November 2026                                       M. Kleidl
+Expires: 5 November 2026                                       M. Kleidl
                                                              Transloadit
-                                                              2 May 2026
+                                                              4 May 2026
 
 
                  Protecting Credentials with HTTP APIs
@@ -15,11 +15,12 @@ Expires: 3 November 2026                                       M. Kleidl
 
 Abstract
 
-   Redirecting HTTP requests to HTTPS, a common pattern for human-facing
-   web resources, can be an anti-pattern for authenticated HTTP API
-   traffic.  This document discusses the pitfalls of doing that and
-   makes deployment recommendations for authenticated HTTP APIs.  It
-   does not specify a protocol.
+   Redirecting HTTP requests to HTTPS is a common pattern for human-
+   facing web resources.  When done for authenticated HTTP API traffic,
+   client credentials are exposed to the network.  This document
+   discusses the pitfalls of the redirect approach and makes deployment
+   recommendations for authenticated HTTP APIs.  It does not specify a
+   protocol.
 
 About This Document
 
@@ -53,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 3 November 2026.
+   This Internet-Draft will expire on 5 November 2026.
 
 Copyright Notice
 
