@@ -47,10 +47,13 @@ informative:
 
 --- abstract
 
-Redirecting HTTP requests to HTTPS, a common pattern for human-facing web
-resources, can be an anti-pattern for authenticated HTTP API traffic.
+Redirecting HTTP requests to HTTPS is a common pattern for human-facing web
+resources.
+When done for authenticated HTTP API traffic, client credentials are
+exposed to the network.
 This document
-discusses the pitfalls of doing that and makes deployment recommendations for authenticated
+discusses the pitfalls of the redirect approach
+and makes deployment recommendations for authenticated
 HTTP APIs. It does not specify a protocol.
 
 --- middle
