@@ -5,9 +5,9 @@
 Building Blocks for HTTP APIs                                    R. Salz
 Internet-Draft                                                 M. Bishop
 Intended status: Best Current Practice               Akamai Technologies
-Expires: 5 November 2026                                       M. Kleidl
+Expires: 6 November 2026                                       M. Kleidl
                                                              Transloadit
-                                                              4 May 2026
+                                                              5 May 2026
 
 
                  Protecting Credentials with HTTP APIs
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 5 November 2026.
+   This Internet-Draft will expire on 6 November 2026.
 
 Copyright Notice
 
@@ -273,8 +273,8 @@ Table of Contents
 3.3.  Disallow Insecure by Default
 
    When authentication is used, clients SHOULD require an explicit
-   indication from the user or caller that an insecure context is
-   expected which is distinct from the provided URI.  Depending on the
+   indication, which is distinct from the provided URI, from the user or
+   caller that an insecure context is expected.  Depending on the
    interface, this might be a UI preference or an API flag.
 
    Absent such an indication, clients of HTTP APIs MUST implement and
