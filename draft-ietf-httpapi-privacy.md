@@ -225,9 +225,10 @@ Proxy-Authorization and are described in Sections 11.6.2 and
 
 ## Disallow Insecure by Default
 
-When authentication is used, clients SHOULD require an explicit indication from
-the user or caller that an insecure context is expected which is distinct from
-the provided URI. Depending on the interface, this might be a UI preference or
+When authentication is used, clients SHOULD require an explicit
+indication, which is distinct from the provided URI, from the user or caller
+that an insecure context is expected.
+Depending on the interface, this might be a UI preference or
 an API flag.
 
 Absent such an indication, clients of HTTP APIs MUST implement and use HTTPS
