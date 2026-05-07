@@ -5,9 +5,9 @@
 Building Blocks for HTTP APIs                                    R. Salz
 Internet-Draft                                                 M. Bishop
 Intended status: Best Current Practice               Akamai Technologies
-Expires: 6 November 2026                                       M. Kleidl
+Expires: 8 November 2026                                       M. Kleidl
                                                              Transloadit
-                                                              5 May 2026
+                                                              7 May 2026
 
 
                  Protecting Credentials with HTTP APIs
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 November 2026.
+   This Internet-Draft will expire on 8 November 2026.
 
 Copyright Notice
 
@@ -288,13 +288,16 @@ Table of Contents
    The behavior recommended in Section 2.4.1 creates the potential for a
    denial of service attack where an attacker guesses many possible
    credentials over an unencrypted connection in hopes of discovering
-   and revoking a valid one.  This can also occur when a legitimate
-   client misbehaves and routinely sends credentials over HTTP.
+   and revoking a valid one.
 
    HTTP API servers implementing this mitigation MUST also guard against
    such attacks, such as by limiting the number of requests before
    closing the connection and rate-limiting the establishment of
    insecure connections.
+
+   This can also occur when a legitimate client misbehaves and routinely
+   sends credentials over HTTP.  HTTP API servers may wish to consider
+   alternatives such as notification or grace period before revocation.
 
 5.  IANA Considerations
 

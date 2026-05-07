@@ -1057,7 +1057,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Salz, et al.</td>
-<td class="center">Expires 6 November 2026</td>
+<td class="center">Expires 8 November 2026</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1070,12 +1070,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <dd class="internet-draft">draft-ietf-httpapi-privacy-latest</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2026-05-05" class="published">5 May 2026</time>
+<time datetime="2026-05-07" class="published">7 May 2026</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Best Current Practice</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2026-11-06">6 November 2026</time></dd>
+<dd class="expires"><time datetime="2026-11-08">8 November 2026</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1140,7 +1140,7 @@ HTTP APIs. It does not specify a protocol.<a href="#section-abstract-1" class="p
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 6 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 8 November 2026.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1467,12 +1467,13 @@ exclusively.<a href="#section-3.3-2" class="pilcrow">¶</a></p>
 client credentials to the network through plaintext HTTP requests.<a href="#section-4-1" class="pilcrow">¶</a></p>
 <p id="section-4-2">The behavior recommended in <a href="#credential-revocation" class="auto internal xref">Section 2.4.1</a> creates the potential for
 a denial of service attack where an attacker guesses many possible credentials
-over an unencrypted connection in hopes of discovering and revoking a valid one.
-This  can also occur when a legitimate client misbehaves and routinely sends
-credentials over HTTP.<a href="#section-4-2" class="pilcrow">¶</a></p>
+over an unencrypted connection in hopes of discovering and revoking a valid one.<a href="#section-4-2" class="pilcrow">¶</a></p>
 <p id="section-4-3">HTTP API servers implementing this mitigation MUST also guard against such attacks, such
 as by limiting the number of requests before closing the connection and
 rate-limiting the establishment of insecure connections.<a href="#section-4-3" class="pilcrow">¶</a></p>
+<p id="section-4-4">This can also occur when a legitimate client misbehaves and routinely sends
+credentials over HTTP.  HTTP API servers may wish to consider alternatives
+such as notification or grace period before revocation.<a href="#section-4-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
