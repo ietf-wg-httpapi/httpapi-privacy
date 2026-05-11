@@ -161,13 +161,13 @@ a response for
 when a credential has been received over an insecure channel.
 
 HTTP status code 403 (Forbidden) indicates that "the server understood the
-request but refuses to fulfill it" {{!HTTP=RFC9110}}. While this is generally
+request but refuses to fulfill it" {{!RFC9110}}. While this is generally
 understood to mean that "the server considers \[the credentials] insufficient to
 grant access," it also states that "a request might be forbidden for reasons
 unrelated to the credentials." HTTP API servers SHOULD return status
 code 403 to all
-requests received over an insecure channel, regardless of the validity of the
-presented credentials.
+requests received over an insecure channel if they included any kind of
+credential, regardless of the their validity.
 
 Because a difference in behavior would enable attackers to guess and check
 possible credentials, an HTTP API server MUST NOT return a different client
@@ -242,10 +242,14 @@ client credentials to the network through plaintext HTTP requests.
 The behavior recommended in {{credential-revocation}} creates the potential for
 a denial of service attack where an attacker guesses many possible credentials
 over an unencrypted connection in hopes of discovering and revoking a valid one.
+
 HTTP API servers implementing this mitigation MUST also guard against such attacks, such
 as by limiting the number of requests before closing the connection and
 rate-limiting the establishment of insecure connections.
 
+This can also occur when a legitimate client misbehaves and routinely sends
+credentials over HTTP.  HTTP API servers may wish to consider alternatives
+such as notification or grace period before revocation.
 
 # IANA Considerations
 
