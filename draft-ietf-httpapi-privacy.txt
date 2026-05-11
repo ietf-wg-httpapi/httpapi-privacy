@@ -5,9 +5,9 @@
 Building Blocks for HTTP APIs                                    R. Salz
 Internet-Draft                                                 M. Bishop
 Intended status: Best Current Practice               Akamai Technologies
-Expires: 6 November 2026                                       M. Kleidl
+Expires: 12 November 2026                                      M. Kleidl
                                                              Transloadit
-                                                              5 May 2026
+                                                             11 May 2026
 
 
                  Protecting Credentials with HTTP APIs
@@ -54,7 +54,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 6 November 2026.
+   This Internet-Draft will expire on 12 November 2026.
 
 Copyright Notice
 
@@ -206,13 +206,13 @@ Table of Contents
    received over an insecure channel.
 
    HTTP status code 403 (Forbidden) indicates that "the server
-   understood the request but refuses to fulfill it" [HTTP].  While this
-   is generally understood to mean that "the server considers [the
+   understood the request but refuses to fulfill it" [RFC9110].  While
+   this is generally understood to mean that "the server considers [the
    credentials] insufficient to grant access," it also states that "a
    request might be forbidden for reasons unrelated to the credentials."
    HTTP API servers SHOULD return status code 403 to all requests
-   received over an insecure channel, regardless of the validity of the
-   presented credentials.
+   received over an insecure channel if they included any kind of
+   credential, regardless of the their validity.
 
    Because a difference in behavior would enable attackers to guess and
    check possible credentials, an HTTP API server MUST NOT return a
@@ -288,10 +288,16 @@ Table of Contents
    The behavior recommended in Section 2.4.1 creates the potential for a
    denial of service attack where an attacker guesses many possible
    credentials over an unencrypted connection in hopes of discovering
-   and revoking a valid one.  HTTP API servers implementing this
-   mitigation MUST also guard against such attacks, such as by limiting
-   the number of requests before closing the connection and rate-
-   limiting the establishment of insecure connections.
+   and revoking a valid one.
+
+   HTTP API servers implementing this mitigation MUST also guard against
+   such attacks, such as by limiting the number of requests before
+   closing the connection and rate-limiting the establishment of
+   insecure connections.
+
+   This can also occur when a legitimate client misbehaves and routinely
+   sends credentials over HTTP.  HTTP API servers may wish to consider
+   alternatives such as notification or grace period before revocation.
 
 5.  IANA Considerations
 
@@ -300,11 +306,6 @@ Table of Contents
 6.  References
 
 6.1.  Normative References
-
-   [HTTP]     Fielding, R., Ed., Nottingham, M., Ed., and J. Reschke,
-              Ed., "HTTP Semantics", STD 97, RFC 9110,
-              DOI 10.17487/RFC9110, June 2022,
-              <https://www.rfc-editor.org/rfc/rfc9110>.
 
    [PERPASS]  Farrell, S. and H. Tschofenig, "Pervasive Monitoring Is an
               Attack", BCP 188, RFC 7258, DOI 10.17487/RFC7258, May
